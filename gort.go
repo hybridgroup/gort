@@ -10,7 +10,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "gort"
 	app.Version = VERSION
-	app.Usage = "RobotOps by your command"
+	app.Usage = "Command Line Utility for RobotOps"
 	app.Commands = []cli.Command{
 		commands.Scan(),
 		commands.Arduino(),

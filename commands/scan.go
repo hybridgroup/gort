@@ -11,10 +11,10 @@ import (
 func Scan() cli.Command {
 	return cli.Command{
 		Name:  "scan",
-		Usage: "Scans serial, Bluetooth, or USB for connected devices",
+		Usage: "Scan for connected devices on Serial, USB, or Bluetooth ports",
 		Action: func(c *cli.Context) {
 			valid := false
-			for _, s := range []string{"serial", "bluetooth", "usb"} {
+			for _, s := range []string{"serial", "usb", "bluetooth"} {
 				if s == c.Args().First() {
 					valid = true
 				}
@@ -22,7 +22,7 @@ func Scan() cli.Command {
 
 			if valid == false {
 				fmt.Println("Invalid/no type supplied.")
-				fmt.Println("Usage: gort scan [serial|bluetooth|usb]")
+				fmt.Println("Usage: gort scan [serial|usb|bluetooth]")
 				return
 			}
 
