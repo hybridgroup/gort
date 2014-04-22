@@ -13,6 +13,7 @@ func main() {
 	app.Usage = "RobotOps by your command"
 	app.Commands = []cli.Command{
 		commands.Scan(),
+		commands.Arduino(),
 	}
 	app.Run(os.Args)
 }
