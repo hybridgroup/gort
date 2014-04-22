@@ -14,6 +14,7 @@ func main() {
 	app.Commands = []cli.Command{
 		commands.Scan(),
 		commands.Arduino(),
+		commands.Bluetooth(),
 	}
 	app.Run(os.Args)
 }
