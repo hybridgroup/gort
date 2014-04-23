@@ -57,6 +57,7 @@ More help coming soon...
 * Submit a Github Pull Request to the appropriate branch and ideally discuss the changes with us in IRC.
 * We will look at the patch, test it out, and give you feedback.
 * Avoid doing minor whitespace changes, renamings, etc. along with merged content. These will be done by the maintainers from time to time but they can complicate merges and should be done seperately.
+* Add unit tests for any new or changed functionality
 * Take care to maintain the existing coding style.
 * All pull requests should be "fast forward"
   * If there are commits after yours use “git rebase -i <new_head_branch>”
