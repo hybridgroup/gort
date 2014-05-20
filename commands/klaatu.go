@@ -74,7 +74,7 @@ ttttttttttLLfffttttttttttttffftttttttttt1111111111tttttttttttttffffffffffLLLLLLL
 tttttttttLLLfffftttttttttffffffttttttt11111111111111tttttttttttttttffffffffffffLfffffffffffLLLLLLLLLLLLLLLCCCCCCCCCCLLLLLLLLLLLLLLLLLLLLLLLLLLLft11:::`)
 				}
 			} else {
-				fmt.Println("Did you mean barada nikto?")
+				fmt.Println("Did you mean Klaatu barada nikto?")
 			}
 		},
 	}
