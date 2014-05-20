@@ -15,6 +15,7 @@ func main() {
 		commands.Scan(),
 		commands.Arduino(),
 		commands.Bluetooth(),
+		commands.Klaatu(),
 	}
 	app.Run(os.Args)
 }
