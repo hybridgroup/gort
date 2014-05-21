@@ -64,9 +64,11 @@ func Arduino() cli.Command {
 				hexfile := c.Args()[1]
 				port := c.Args()[2]
 				file, _ := ioutil.TempFile(os.TempDir(), "")
+				defer file.Close()
+				defer os.Remove(file.Name())
 
 				if hexfile == "firmata" || hexfile == "rapiro" {
-					hexfile = fmt.Sprintf("arduino/%v.cpp.hex", hexfile)
+					hexfile = fmt.Sprintf("commands/support/arduino/%v.cpp.hex", hexfile)
 					data, _ := Asset(hexfile)
 					file.Write(data)
 					file.Sync()
@@ -82,8 +84,6 @@ func Arduino() cli.Command {
 				default:
 					fmt.Println("OS not yet supported.")
 				}
-
-				defer os.Remove(file.Name())
 			}
 		},
 	}
