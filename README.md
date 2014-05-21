@@ -60,11 +60,8 @@ go get github.com/jteeuwen/go-bindata/...
 
 Once installed, you build the assets into the project like this:
 ```
-cd commands && go-bindata support/... && cd ..
+cd commands && go-bindata -pkg="commands" support/... && cd ..
 ```
-
-Please note that you current need to manually change the package name in commands/bindata.go from `package main` to `package commands` in order to build the executable.
-
 
 ## Contributing
 
