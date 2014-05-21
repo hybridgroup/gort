@@ -5,8 +5,8 @@ import (
 	"github.com/codegangsta/cli"
 	"os"
 	"os/exec"
-	"path"
 	"runtime"
+	"io/ioutil"
 )
 
 func Arduino() cli.Command {
@@ -63,11 +63,14 @@ func Arduino() cli.Command {
 
 				hexfile := c.Args()[1]
 				port := c.Args()[2]
+				file, _ := ioutil.TempFile(os.TempDir(), "")
 
 				if hexfile == "firmata" || hexfile == "rapiro" {
-					hexfile = fmt.Sprintf("support/arduino/%v.cpp.hex", hexfile)
-					_, currentfile, _, _ := runtime.Caller(0)
-					hexfile = path.Join(path.Dir(currentfile), hexfile)
+					hexfile = fmt.Sprintf("arduino/%v.cpp.hex", hexfile)
+					data, _ := Asset(hexfile)
+					file.Write(data)
+					file.Sync()
+					hexfile = file.Name()
 				}
 
 				switch runtime.GOOS {
@@ -79,6 +82,8 @@ func Arduino() cli.Command {
 				default:
 					fmt.Println("OS not yet supported.")
 				}
+
+				defer os.Remove(file.Name())
 			}
 		},
 	}
