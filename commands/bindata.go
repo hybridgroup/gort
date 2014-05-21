@@ -25,7 +25,7 @@ func bindata_read(data []byte, name string) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func commands_support_arduino_firmata_cpp_hex() ([]byte, error) {
+func support_arduino_firmata_cpp_hex() ([]byte, error) {
 	return bindata_read([]byte{
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x00, 0xff, 0x8c, 0x7d,
 		0x59, 0x92, 0x2b, 0x39, 0x0e, 0xe4, 0xff, 0x98, 0xcd, 0x5d, 0x82, 0x3b,
@@ -1079,11 +1079,11 @@ func commands_support_arduino_firmata_cpp_hex() ([]byte, error) {
 		0x7e, 0x27, 0x5e, 0xba, 0x1c, 0xd3, 0xda, 0x28, 0xae, 0xfc, 0xff, 0x03,
 		0x00, 0x00, 0xff, 0xff, 0xab, 0x20, 0xa7, 0xe0, 0xe1, 0x7d, 0x00, 0x00,
 		},
-		"commands/support/arduino/firmata.cpp.hex",
+		"support/arduino/firmata.cpp.hex",
 	)
 }
 
-func commands_support_arduino_rapiro_cpp_hex() ([]byte, error) {
+func support_arduino_rapiro_cpp_hex() ([]byte, error) {
 	return bindata_read([]byte{
 		0x1f, 0x8b, 0x08, 0x00, 0x00, 0x09, 0x6e, 0x88, 0x00, 0xff, 0x8c, 0x5d,
 		0x5d, 0x7a, 0xe4, 0xaa, 0x92, 0x7c, 0x9f, 0xef, 0x9b, 0xbd, 0x08, 0x04,
@@ -1994,7 +1994,7 @@ func commands_support_arduino_rapiro_cpp_hex() ([]byte, error) {
 		0x3f, 0x00, 0x00, 0xff, 0xff, 0x39, 0x65, 0x5b, 0x16, 0x03, 0x75, 0x00,
 		0x00,
 		},
-		"commands/support/arduino/rapiro.cpp.hex",
+		"support/arduino/rapiro.cpp.hex",
 	)
 }
 
@@ -2021,6 +2021,6 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string] func() ([]byte, error) {
-	"commands/support/arduino/firmata.cpp.hex": commands_support_arduino_firmata_cpp_hex,
-	"commands/support/arduino/rapiro.cpp.hex": commands_support_arduino_rapiro_cpp_hex,
+	"support/arduino/firmata.cpp.hex": support_arduino_firmata_cpp_hex,
+	"support/arduino/rapiro.cpp.hex": support_arduino_rapiro_cpp_hex,
 }

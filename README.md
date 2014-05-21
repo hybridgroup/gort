@@ -50,6 +50,22 @@ $ ./gort scan serial
 
 More help coming soon...
 
+## Building
+
+You need to have installed go-bindata to build the file assets into Gort for a single standalone executable:
+
+```
+go get github.com/jteeuwen/go-bindata/...
+```
+
+Once installed, you build the assets into the project like this:
+```
+cd commands && go-bindata support/... && cd ..
+```
+
+Please note that you current need to manually change the package name in commands/bindata.go from `package main` to `package commands` in order to build the executable.
+
+
 ## Contributing
 
 * All patches must be provided under the Apache 2.0 License

@@ -68,7 +68,7 @@ func Arduino() cli.Command {
 				defer os.Remove(file.Name())
 
 				if hexfile == "firmata" || hexfile == "rapiro" {
-					hexfile = fmt.Sprintf("commands/support/arduino/%v.cpp.hex", hexfile)
+					hexfile = fmt.Sprintf("support/arduino/%v.cpp.hex", hexfile)
 					data, _ := Asset(hexfile)
 					file.Write(data)
 					file.Sync()
