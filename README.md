@@ -20,7 +20,7 @@ The Gort CLI provides many useful features on many hardware platforms, and has n
 ## How To Use
 
 ```
-$ ./gort 
+$ ./gort
 NAME:
    gort - Command Line Utility for RobotOps
 
@@ -31,14 +31,18 @@ VERSION:
    0.0.1
 
 COMMANDS:
-   scan		Scan for connected devices on Serial, USB, or Bluetooth ports
-   arduino	Install avrdude, and upload sketches to your Arduino
-   bluetooth	Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
-   help, h	Shows a list of commands or help for one command
+   scan   Scan for connected devices on Serial, USB, or Bluetooth ports
+   bluetooth  Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
+   arduino  Install avrdude, and upload sketches to your Arduino
+   spark  Upload sketches to your Spark
+   digispark  Upload sketches to your Digispark
+   crazyflie  Configure your Crazyflie
+   klaatu barada nikto
+   help, h  Shows a list of commands or help for one command
    
 GLOBAL OPTIONS:
-   --version, -v	print the version
-   --help, -h		show help
+   --version, -v  print the version
+   --help, -h   show help
 ```
 
 Scan for connected serial devices:
