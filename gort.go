@@ -17,6 +17,7 @@ func main() {
 		commands.Bluetooth(),
 		commands.Klaatu(),
 		commands.Spark(),
+		commands.Digispark(),
 	}
 	app.Run(os.Args)
 }
