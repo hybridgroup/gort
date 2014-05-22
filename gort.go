@@ -17,6 +17,7 @@ func main() {
 		commands.Arduino(),
 		commands.Spark(),
 		commands.Digispark(),
+		commands.Crazyflie(),
 		commands.Klaatu(),
 	}
 	app.Run(os.Args)
