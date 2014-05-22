@@ -13,11 +13,11 @@ func main() {
 	app.Usage = "Command Line Utility for RobotOps"
 	app.Commands = []cli.Command{
 		commands.Scan(),
-		commands.Arduino(),
 		commands.Bluetooth(),
-		commands.Klaatu(),
+		commands.Arduino(),
 		commands.Spark(),
 		commands.Digispark(),
+		commands.Klaatu(),
 	}
 	app.Run(os.Args)
 }

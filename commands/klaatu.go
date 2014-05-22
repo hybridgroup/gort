@@ -8,7 +8,7 @@ import (
 func Klaatu() cli.Command {
 	return cli.Command{
 		Name:  "klaatu",
-		Usage: "Earth ;-)",
+		Usage: "barada nikto",
 		Action: func(c *cli.Context) {
 			if len(c.Args()) == 2 {
 				if c.Args()[0] == "barada" && c.Args()[1] == "nikto" {
