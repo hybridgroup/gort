@@ -94,7 +94,9 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
       return nil, err
   }
 
-  return http.NewRequest("PUT", uri, body)
+  request, _ := http.NewRequest("PUT", uri, body)
+  request.Header.Add("Content-Type", writer.FormDataContentType())
+  return request, nil
 }
 
 func openUploadFile(path string)([]byte, error) {
