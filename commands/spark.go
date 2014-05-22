@@ -36,16 +36,15 @@ func Spark() cli.Command {
 
 			switch c.Args().First() {
 			case "upload":
-
-				if len(c.Args()) < 5 {
+				if len(c.Args()) < 4 {
 					fmt.Println("Invalid number of arguments.")
 					usage()
 					return
 				}
 					
-				accessToken := c.Args()[2]
-				deviceId := c.Args()[3]
-				fileName := c.Args()[4]
+				accessToken := c.Args()[1]
+				deviceId := c.Args()[2]
+				fileName := c.Args()[3]
 				url := fmt.Sprintf("https://api.spark.io/v1/devices/%v", deviceId)
 
 			  extraParams := map[string]string{}
