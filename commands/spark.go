@@ -26,7 +26,7 @@ func Spark() cli.Command {
 			usage := func() {
 				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
-				fmt.Println("  gort spark upload [accessToken] [deviceId] [default|path name] # uploads sketch to Spark")
+				fmt.Println("  gort spark upload [accessToken] [deviceId] [default|voodoospark|path name] # uploads sketch to Spark")
 			}
 
 			if valid == false {
@@ -75,6 +75,7 @@ func Spark() cli.Command {
 }
 
 func newfileUploadRequest(uri string, params map[string]string, paramName, path string) (*http.Request, error) {
+	fmt.Println(path)
 	data, err := openUploadFile(path)
   body := &bytes.Buffer{}
   writer := multipart.NewWriter(body)
@@ -100,21 +101,22 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
 
 func openUploadFile(path string)([]byte, error) {
 	filePath := path
-	if filePath != "default" {
-		  file, err := os.Open(filePath)
-		  defer file.Close()
-  		if err != nil {
-      	return nil, err
- 		 	}
- 		 	buffer := make([]byte, 1024)
- 		 	file.Read(buffer)
-  		return buffer, nil
-	} else {
-		filePath = "support/spark/default.cpp"
-		file, err := Asset(filePath)
+	if filePath == "default" || filePath == "voodoospark" {
+		filePath = fmt.Sprintf("support/spark/%v.cpp", filePath)
+		fmt.Println(filePath)
+		data, err := Asset(filePath)
   	if err != nil {
       return nil, err
  		}
-		return file, nil
+		return data, nil					
+	} else {
+		file, err := os.Open(filePath)
+	  defer file.Close()
+		if err != nil {
+    	return nil, err
+		}
+	 	data := make([]byte, 4096)
+	 	file.Read(data)
+		return data, nil
 	}
 }
