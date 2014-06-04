@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    voodoospark.cpp
   * @author  Chris Williams
-  * @version V2.1.0
-  * @date    22-May-2014
+  * @version V2.3.0
+  * @date    1-June-2014
   * @brief   Exposes the firmware level API through a TCP Connection initiated
   *          to the spark device
   ******************************************************************************
@@ -38,23 +38,25 @@
 // Port = 0xbeef
 #define PORT 48879
 
-// TCPClient client;
 TCPServer server = TCPServer(PORT);
 TCPClient client;
-byte reading[20];
-byte previous[20];
-long SerialSpeed[] = {
+bool isConnected = false;
+byte reporting[20];
+unsigned long lastms;
+unsigned long nowms;
+unsigned long sampleInterval = 20;
+unsigned long SerialSpeed[] = {
   600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200
 };
 
 /*
   PWM/Servo support is CONFIRMED available on:
 
-  D0, D1, A0, A1, A5
+  D0, D1, A0, A1, A4, A5, A6, A7
 
-  Allocate 5 servo objects:
+  Allocate 8 servo objects:
  */
-Servo servos[5];
+Servo servos[8];
 /*
   The Spark board can only support PWM/Servo on specific pins, so
   based on the pin number, determine the servo index for the allocated
@@ -65,25 +67,42 @@ int ToServoIndex(int pin) {
   if (pin == 0 || pin == 1) return pin;
   // A0, A1
   if (pin == 10 || pin == 11) return pin - 8;
-  // A5
-  if (pin == 15) return 4;
+  // A4, A5, A6, A7
+  if (pin >= 14) return pin - 10;
 }
 
-
 void send(int action, int pin, int value) {
-  if (previous[pin] != value) {
-    server.write(action);
-    server.write(pin);
-    server.write(value);
-  }
-  previous[pin] = value;
+  // See https://github.com/voodootikigod/voodoospark/issues/20
+  // to understand why the send function splits values
+  // into two 7-bit bytes before sending.
+  //
+  int lsb = value & 0x7f;
+  int msb = value >> 0x07 & 0x7f;
+
+  server.write(action);
+  server.write(pin);
+
+  // Send the LSB
+  server.write(lsb);
+  // Send the MSB
+  server.write(msb);
+
+  #ifdef DEBUG
+  Serial.print("SENT: ");
+  Serial.print(value);
+  Serial.print(" -> [ ");
+  Serial.print(lsb);
+  Serial.print(", ");
+  Serial.print(msb);
+  Serial.println(" ]");
+  #endif
 }
 
 void report() {
   for (int i = 0; i < 20; i++) {
-    if (reading[i]) {
-      int dr = (reading[i] & 1);
-      int ar = (reading[i] & 2);
+    if (reporting[i]) {
+      int dr = (reporting[i] & 1);
+      int ar = (reporting[i] & 2);
 
       if (i < 10 && dr) {
         send(0x03, i, digitalRead(i));
@@ -100,15 +119,28 @@ void report() {
   }
 }
 
+void reset() {
+  #ifdef DEBUG
+  Serial.print("RESETTING");
+  #endif
+
+  for (int i = 0; i < 20; i++) {
+    // Clear the pin reporting list
+    reporting[i] = 0;
+
+    // Detach any attached servos
+    if (i < 8) {
+      if (servos[i].attached()) {
+        servos[i].detach();
+      }
+    }
+  }
+}
+
 char myIpString[24];
 
 
 void setup() {
-
-  for (int i = 0; i < 20; i++) {
-    reading[i] = 0;
-    previous[i] = 0;
-  }
 
   server.begin();
   netapp_ipconfig(&ip_config);
@@ -131,6 +163,7 @@ void setup() {
 #define msg_digitalRead                (0x03)
 #define msg_analogRead                 (0x04)
 #define msg_setAlwaysSendBit           (0x05)
+#define msg_setSampleInterval          (0x06)
 /* NOTE GAP */
 #define msg_serialBegin                (0x10)
 #define msg_serialEnd                  (0x11)
@@ -177,8 +210,8 @@ uint8_t msgMinLength[] = {
   1,    // msg_digitalRead
   1,    // msg_analogRead
   2,    // msg_setAlwaysSendBit
-  // gap from 0x06-0x0f
-  0,    // msg_0x06
+  1,    // msg_setSampleInterval
+  // gap from 0x07-0x0f
   0,    // msg_0x07
   0,    // msg_0x08
   0,    // msg_0x09
@@ -259,8 +292,13 @@ int idx, action, a;
 
 void loop() {
   if (client.connected()) {
-    report();
+    isConnected = true;
+    nowms = millis();
 
+    if (nowms - lastms > sampleInterval) {
+      lastms += sampleInterval;
+      report();
+    }
 
 
     a = client.available();
@@ -308,12 +346,10 @@ void loop() {
                 pinMode(pin, OUTPUT);
               } else if (mode == 0x04) {
                 pinMode(pin, OUTPUT);
-                // Don't re-attach servos
-                if (!servos[ToServoIndex(pin)].attached()) {
-                  // If no servo object has been attached to pin at
-                  // this servo index, attach it now.
-                  servos[ToServoIndex(pin)].attach(pin);
+                if (servos[ToServoIndex(pin)].attached()) {
+                  servos[ToServoIndex(pin)].detach();
                 }
+                servos[ToServoIndex(pin)].attach(pin);
               }
               break;
 
@@ -350,9 +386,7 @@ void loop() {
               Serial.print("VALUE sent: ");
               Serial.println(val, HEX);
               #endif
-              server.write(0x03);    // could be (action)
-              server.write(pin);
-              server.write(val);
+              send(0x03, pin, val);
               break;
 
             case msg_analogRead:  // analogRead
@@ -364,15 +398,18 @@ void loop() {
               Serial.print("VALUE sent: ");
               Serial.println(val, HEX);
               #endif
-              server.write(0x04);    // could be (action)
-              server.write(pin);
-              server.write(val);
+              send(0x04, pin, val);
               break;
 
             case msg_setAlwaysSendBit: // set always send bit
               pin = client.read();
               val = client.read();
-              reading[pin] = val;
+              reporting[pin] = val;
+              break;
+
+            case msg_setSampleInterval: // set the sampling interval in ms
+              val = client.read();
+              sampleInterval = val;
               break;
 
             // Serial API
@@ -402,9 +439,7 @@ void loop() {
               } else {
                 val = Serial1.peek();
               }
-              server.write(0x07);
-              server.write(type);
-              server.write(val);
+              send(0x07, type, val);
               break;
 
             case msg_serialAvailable:  // serial.available()
@@ -414,9 +449,7 @@ void loop() {
               } else {
                 val = Serial1.available();
               }
-              server.write(0x07);
-              server.write(type);
-              server.write(val);
+              send(0x07, type, val);
               break;
 
             case msg_serialWrite:  // serial.write
@@ -439,9 +472,7 @@ void loop() {
               } else {
                 val = Serial1.read();
               }
-              server.write(0x16);
-              server.write(type);
-              server.write(val);
+              send(0x16, type, val);
               break;
 
             case msg_serialFlush: // serial.flush
@@ -589,9 +620,7 @@ void loop() {
             case msg_servoRead:
               pin = client.read();
               val = servos[ToServoIndex(pin)].read();
-              server.write(0x43);    // could be (action)
-              server.write(pin);
-              server.write(val);
+              send(0x43, pin, val);
               break;
 
             case msg_servoDetach:
@@ -607,7 +636,13 @@ void loop() {
       } // <-- This is the end of the valid action check
     } // <-- This is the end of the length check
   } else {
-    // if no client is yet connected, check for a new connection
+    // Upon disconnection, reset the state
+    if (isConnected) {
+      isConnected = false;
+      reset();
+    }
+
+    // If no client is yet connected, check for a new connection
     client = server.available();
   }
 }
