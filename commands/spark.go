@@ -45,14 +45,16 @@ func Spark() cli.Command {
 				accessToken := c.Args()[1]
 				deviceId := c.Args()[2]
 				fileName := c.Args()[3]
-				url := fmt.Sprintf("https://api.spark.io/v1/devices/%v", deviceId)
+				fmt.Println(accessToken)
+				fmt.Println(deviceId)
+				url := fmt.Sprintf("https://api.spark.io/v1/devices/%v?access_token=%v", deviceId, accessToken)
 
+				fmt.Println(url)
 			  extraParams := map[string]string{}
 			  request, err := newfileUploadRequest(url, extraParams, "file", fileName)
 			  if err != nil {
 			      log.Fatal(err)
 			  }
-			  request.Header.Set("Authorization", "Bearer " + accessToken)
 			  client := &http.Client{}
 			  resp, err := client.Do(request)
 			  if err != nil {
@@ -76,10 +78,11 @@ func Spark() cli.Command {
 
 func newfileUploadRequest(uri string, params map[string]string, paramName, path string) (*http.Request, error) {
 	fmt.Println(path)
-	data, err := openUploadFile(path)
+	data, fileName, err := openUploadFile(path)
   body := &bytes.Buffer{}
   writer := multipart.NewWriter(body)
-  part, err := writer.CreateFormFile(paramName, path)
+  fmt.Println(fileName)
+  part, err := writer.CreateFormFile(paramName, fileName)
   if err != nil {
       return nil, err
   }
@@ -95,28 +98,29 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
   }
 
   request, _ := http.NewRequest("PUT", uri, body)
+  fmt.Println(writer.FormDataContentType())
   request.Header.Add("Content-Type", writer.FormDataContentType())
   return request, nil
 }
 
-func openUploadFile(path string)([]byte, error) {
+func openUploadFile(path string)([]byte, string, error) {
 	filePath := path
 	if filePath == "default" || filePath == "voodoospark" {
 		filePath = fmt.Sprintf("support/spark/%v.cpp", filePath)
 		fmt.Println(filePath)
 		data, err := Asset(filePath)
   	if err != nil {
-      return nil, err
+      return nil, "", err
  		}
-		return data, nil					
+		return data, filePath, nil					
 	} else {
 		file, err := os.Open(filePath)
 	  defer file.Close()
 		if err != nil {
-    	return nil, err
+    	return nil, "", err
 		}
-	 	data := make([]byte, 4096)
+	 	data := make([]byte, 65535)
 	 	file.Read(data)
-		return data, nil
+		return data, filePath, nil
 	}
 }
