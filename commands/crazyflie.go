@@ -30,7 +30,7 @@ func Crazyflie() cli.Command {
 
 			switch c.Args().First() {
 			case "set-udev-rules":
-				
+
 				fmt.Println("set-udev-rules here...")
 
 			}
