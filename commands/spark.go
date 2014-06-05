@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/codegangsta/cli"
 	"os"
+	"path"
 	"bytes"
   "io"
   "log"
@@ -45,11 +46,7 @@ func Spark() cli.Command {
 				accessToken := c.Args()[1]
 				deviceId := c.Args()[2]
 				fileName := c.Args()[3]
-				fmt.Println(accessToken)
-				fmt.Println(deviceId)
 				url := fmt.Sprintf("https://api.spark.io/v1/devices/%v?access_token=%v", deviceId, accessToken)
-
-				fmt.Println(url)
 			  extraParams := map[string]string{}
 			  request, err := newfileUploadRequest(url, extraParams, "file", fileName)
 			  if err != nil {
@@ -77,11 +74,9 @@ func Spark() cli.Command {
 }
 
 func newfileUploadRequest(uri string, params map[string]string, paramName, path string) (*http.Request, error) {
-	fmt.Println(path)
 	data, fileName, err := openUploadFile(path)
   body := &bytes.Buffer{}
   writer := multipart.NewWriter(body)
-  fmt.Println(fileName)
   part, err := writer.CreateFormFile(paramName, fileName)
   if err != nil {
       return nil, err
@@ -98,21 +93,19 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
   }
 
   request, _ := http.NewRequest("PUT", uri, body)
-  fmt.Println(writer.FormDataContentType())
   request.Header.Add("Content-Type", writer.FormDataContentType())
   return request, nil
 }
 
-func openUploadFile(path string)([]byte, string, error) {
-	filePath := path
+func openUploadFile(filePath string)([]byte, string, error) {
 	if filePath == "default" || filePath == "voodoospark" {
-		filePath = fmt.Sprintf("support/spark/%v.cpp", filePath)
-		fmt.Println(filePath)
+		fileName := fmt.Sprintf("%v.cpp", filePath)
+		filePath = fmt.Sprintf("support/spark/%v", fileName)
 		data, err := Asset(filePath)
   	if err != nil {
       return nil, "", err
  		}
-		return data, filePath, nil					
+		return data, fileName, nil					
 	} else {
 		file, err := os.Open(filePath)
 	  defer file.Close()
@@ -121,6 +114,6 @@ func openUploadFile(path string)([]byte, string, error) {
 		}
 	 	data := make([]byte, 65535)
 	 	file.Read(data)
-		return data, filePath, nil
+		return data, path.Base(filePath), nil
 	}
 }
