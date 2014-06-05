@@ -3,10 +3,10 @@ package commands
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"runtime"
-	"io/ioutil"
 )
 
 func Arduino() cli.Command {

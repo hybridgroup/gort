@@ -40,7 +40,7 @@ func Digispark() cli.Command {
 				fmt.Println("upload here...")
 
 			case "set-udev-rules":
-				
+
 				fmt.Println("set-udev-rules here...")
 
 			}
