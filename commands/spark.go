@@ -1,15 +1,15 @@
 package commands
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/codegangsta/cli"
+	"io"
+	"log"
+	"mime/multipart"
+	"net/http"
 	"os"
 	"path"
-	"bytes"
-  "io"
-  "log"
-  "mime/multipart"
-  "net/http"
 )
 
 func Spark() cli.Command {
@@ -42,31 +42,31 @@ func Spark() cli.Command {
 					usage()
 					return
 				}
-					
+
 				accessToken := c.Args()[1]
 				deviceId := c.Args()[2]
 				fileName := c.Args()[3]
 				url := fmt.Sprintf("https://api.spark.io/v1/devices/%v?access_token=%v", deviceId, accessToken)
-			  extraParams := map[string]string{}
-			  request, err := newfileUploadRequest(url, extraParams, "file", fileName)
-			  if err != nil {
-			      log.Fatal(err)
-			  }
-			  client := &http.Client{}
-			  resp, err := client.Do(request)
-			  if err != nil {
-			      log.Fatal(err)
-			  } else {
-			      body := &bytes.Buffer{}
-			      _, err := body.ReadFrom(resp.Body)
-			    if err != nil {
-			          log.Fatal(err)
-			      }
-			    resp.Body.Close()
-			      fmt.Println(resp.StatusCode)
-			      fmt.Println(resp.Header)
-			      fmt.Println(body)
-			  }
+				extraParams := map[string]string{}
+				request, err := newfileUploadRequest(url, extraParams, "file", fileName)
+				if err != nil {
+					log.Fatal(err)
+				}
+				client := &http.Client{}
+				resp, err := client.Do(request)
+				if err != nil {
+					log.Fatal(err)
+				} else {
+					body := &bytes.Buffer{}
+					_, err := body.ReadFrom(resp.Body)
+					if err != nil {
+						log.Fatal(err)
+					}
+					resp.Body.Close()
+					fmt.Println(resp.StatusCode)
+					fmt.Println(resp.Header)
+					fmt.Println(body)
+				}
 
 			}
 		},
@@ -75,45 +75,45 @@ func Spark() cli.Command {
 
 func newfileUploadRequest(uri string, params map[string]string, paramName, path string) (*http.Request, error) {
 	data, fileName, err := openUploadFile(path)
-  body := &bytes.Buffer{}
-  writer := multipart.NewWriter(body)
-  part, err := writer.CreateFormFile(paramName, fileName)
-  if err != nil {
-      return nil, err
-  }
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+	part, err := writer.CreateFormFile(paramName, fileName)
+	if err != nil {
+		return nil, err
+	}
 	file := bytes.NewReader(data)
-  _, err = io.Copy(part, file)
+	_, err = io.Copy(part, file)
 
-  for key, val := range params {
-      _ = writer.WriteField(key, val)
-  }
-  err = writer.Close()
-  if err != nil {
-      return nil, err
-  }
+	for key, val := range params {
+		_ = writer.WriteField(key, val)
+	}
+	err = writer.Close()
+	if err != nil {
+		return nil, err
+	}
 
-  request, _ := http.NewRequest("PUT", uri, body)
-  request.Header.Add("Content-Type", writer.FormDataContentType())
-  return request, nil
+	request, _ := http.NewRequest("PUT", uri, body)
+	request.Header.Add("Content-Type", writer.FormDataContentType())
+	return request, nil
 }
 
-func openUploadFile(filePath string)([]byte, string, error) {
+func openUploadFile(filePath string) ([]byte, string, error) {
 	if filePath == "default" || filePath == "voodoospark" {
 		fileName := fmt.Sprintf("%v.cpp", filePath)
 		filePath = fmt.Sprintf("support/spark/%v", fileName)
 		data, err := Asset(filePath)
-  	if err != nil {
-      return nil, "", err
- 		}
-		return data, fileName, nil					
+		if err != nil {
+			return nil, "", err
+		}
+		return data, fileName, nil
 	} else {
 		file, err := os.Open(filePath)
-	  defer file.Close()
+		defer file.Close()
 		if err != nil {
-    	return nil, "", err
+			return nil, "", err
 		}
-	 	data := make([]byte, 65535)
-	 	file.Read(data)
+		data := make([]byte, 65535)
+		file.Read(data)
 		return data, path.Base(filePath), nil
 	}
 }
