@@ -15,7 +15,7 @@ Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 ## Getting Started
 We are going to have precompiled binaries available soon. You can also build from source.
 
-The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, & Artoo, as well as JavaScript frameworks such as Johnny-Five. 
+The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, & Artoo, as well as frameworks such as Johnny-Five. 
 
 ## How To Use
 
@@ -35,7 +35,7 @@ COMMANDS:
    bluetooth  Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
    arduino  Install avrdude, and upload sketches to your Arduino
    spark  Upload sketches to your Spark
-   digispark  Upload sketches to your Digispark
+   digispark  Configure your Digispark microcontroller
    crazyflie  Configure your Crazyflie
    klaatu barada nikto
    help, h  Shows a list of commands or help for one command
