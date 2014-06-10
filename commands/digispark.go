@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"github.com/codegangsta/cli"
 	"io"
+	"log"
 	"net/http"
 	"os"
+	"os/user"
 	"runtime"
 	"strings"
 )
@@ -106,13 +108,14 @@ func exists(path string) (bool, error) {
 }
 
 func downloadDigisparkInstaller() {
+	dirName, _ := createGortDirectory()
 	switch runtime.GOOS {
 	case "linux":
-		downloadFromUrl("http://littlewire.cc/resources/LittleWirev13Install-Linux64.tar.gz")
+		downloadFromUrl(dirName, "http://littlewire.cc/resources/LittleWirev13Install-Linux64.tar.gz")
 	case "darwin":
-		downloadFromUrl("http://littlewire.cc/resources/LittleWirev13Install-OSX.zip")
+		downloadFromUrl(dirName, "http://littlewire.cc/resources/LittleWirev13Install-OSX.zip")
 	default:
-		downloadFromUrl("http://littlewire.cc/resources/LittleWirev13Install-Win.zip")
+		downloadFromUrl(dirName, "http://littlewire.cc/resources/LittleWirev13Install-Win.zip")
 	}
 }
 
@@ -124,13 +127,13 @@ func runDigisparkInstaller() {
 	fmt.Println("run digispark installer here...")
 }
 
-func downloadFromUrl(url string) {
+func downloadFromUrl(dirName string, url string) {
 	tokens := strings.Split(url, "/")
 	fileName := tokens[len(tokens)-1]
 	fmt.Println("Downloading", url, "to", fileName)
 
 	// TODO: check file existence first with io.IsExist
-	output, err := os.Create(fileName)
+	output, err := os.Create(dirName + "/" + fileName)
 	if err != nil {
 		fmt.Println("Error while creating", fileName, "-", err)
 		return
@@ -151,4 +154,19 @@ func downloadFromUrl(url string) {
 	}
 
 	fmt.Println(n, "bytes downloaded.")
+}
+
+func createGortDirectory() (string, error) {
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+	dirName := usr.HomeDir + "/" + "gort"
+	fileExists, err := exists(dirName)
+	if fileExists {
+		fmt.Println("Gort lives")
+	} else {
+		os.Mkdir(dirName, 0777)
+	}
+	return dirName, err
 }
