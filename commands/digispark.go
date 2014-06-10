@@ -150,12 +150,12 @@ func runDigisparkInstaller() {
 		cmd.Stderr = os.Stderr
 		cmd.Run()
 	case "darwin":
-		cmd := exec.Command(gortDirName() + "/littlewireLoader_v13")
+		cmd := exec.Command(gortDirName() + "/LittleWirev13Install")
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
 	default:
-		cmd := exec.Command(gortDirName() + "/littlewireLoader_v13.exe")
+		cmd := exec.Command(gortDirName() + "/LittleWirev13Install.exe")
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 		cmd.Run()
