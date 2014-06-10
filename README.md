@@ -85,5 +85,11 @@ cd commands && go-bindata -pkg="commands" support/... && cd ..
 
 Version 0.0.1 - Initial Release
 
-## License
-Copyright (c) 2014 The Hybrid Group. Licensed under the Apache 2.0 license.
+## Licenses
+Gort is copyright (c) 2014 The Hybrid Group. Licensed under the Apache 2.0 license.
+
+Firmata is copyright (c) 2006-2008 Hans-Christoph Steiner. Licensed under GNU Lesser General Public License. All rights reserved.
+
+Rapiro is copyright (c) 2013-2014 Shota Ishiwatari. Licensed under the Creative Commons - Public Domain Dedication License.
+
+VoodooSpark is copyright (c) 2012, 2013, 2014 Rick Waldron & Chris Williams. Licensed under the MIT License.
