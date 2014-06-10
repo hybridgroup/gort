@@ -58,7 +58,7 @@ func Digispark() cli.Command {
 				return
 
 			case "set-udev-rules":
-				if runtime.GOOS == "darwin" || runtime.GOOS == "linux" {
+				if runtime.GOOS == "linux" {
 					digisparkSetUdevRules()
 				} else {
 					fmt.Println("No need to set-udev-rules on your OS")
