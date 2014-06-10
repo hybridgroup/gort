@@ -20,25 +20,36 @@ func Digispark() cli.Command {
 			}
 
 			usage := func() {
-				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
-				fmt.Println("  gort digispark upload [default|path name] # uploads sketch to Digispark")
+				fmt.Println("  gort digispark install # installs software to upload firmware to Digispark")
+				fmt.Println("  gort digispark upload [littlewire] # uploads firmware to Digispark")
 				fmt.Println("  gort digispark set-udev-rules # set udev rules needed to connect to Digispark")
 			}
 
 			if valid == false {
+				fmt.Println("Invalid/no subcommand supplied.\n")
 				usage()
 				return
 			}
 
 			switch c.Args().First() {
-			case "upload":
+			case "install":
+				fmt.Println("install here...")
 
-				if len(c.Args()) < 3 {
+			case "upload":
+				if len(c.Args()) != 2 {
 					fmt.Println("Invalid number of arguments.")
 					usage()
 					return
 				}
+
+				firmware := c.Args()[1]
+				if firmware != "littlewire" {
+					fmt.Println("Unknown firmware.")
+					usage()
+					return
+				}
+
 				fmt.Println("upload here...")
 
 			case "set-udev-rules":
