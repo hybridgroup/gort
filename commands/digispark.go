@@ -1,13 +1,16 @@
 package commands
 
 import (
+	"archive/zip"
 	"fmt"
 	"github.com/codegangsta/cli"
 	"io"
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"os/user"
+	"path/filepath"
 	"runtime"
 	"strings"
 )
@@ -40,7 +43,6 @@ func Digispark() cli.Command {
 			switch c.Args().First() {
 			case "install":
 				downloadDigisparkInstaller()
-				extractDigisparkInstaller()
 				runDigisparkInstaller()
 				return
 
@@ -58,7 +60,8 @@ func Digispark() cli.Command {
 					return
 				}
 
-				fmt.Println("upload here...")
+				runDigisparkInstaller()
+				return
 
 			case "set-udev-rules":
 				if runtime.GOOS == "darwin" || runtime.GOOS == "linux" {
@@ -111,23 +114,55 @@ func downloadDigisparkInstaller() {
 	dirName, _ := createGortDirectory()
 	switch runtime.GOOS {
 	case "linux":
-		downloadFromUrl(dirName, "http://littlewire.cc/resources/LittleWirev13Install-Linux64.tar.gz")
+		zipFile := "http://littlewire.cc/resources/LittleWirev13Install-Linux64.tar.gz"
+		fileName := downloadFromUrl(dirName, zipFile)
+		extractDigisparkInstaller(dirName, dirName+"/"+fileName)
 	case "darwin":
-		downloadFromUrl(dirName, "http://littlewire.cc/resources/LittleWirev13Install-OSX.zip")
+		zipFile := "http://littlewire.cc/resources/LittleWirev13Install-OSX.zip"
+		fileName := downloadFromUrl(dirName, zipFile)
+		unzipDigisparkInstaller(dirName, dirName+"/"+fileName)
 	default:
-		downloadFromUrl(dirName, "http://littlewire.cc/resources/LittleWirev13Install-Win.zip")
+		zipFile := "http://littlewire.cc/resources/LittleWirev13Install-Win.zip"
+		fileName := downloadFromUrl(dirName, zipFile)
+		unzipDigisparkInstaller(dirName, dirName+"/"+fileName)
 	}
 }
 
-func extractDigisparkInstaller() {
-	fmt.Println("extract digispark installer here...")
+func extractDigisparkInstaller(dirName string, zipFile string) {
+	cmd := exec.Command("tar", "-C", dirName, "-zxvf", zipFile)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Run()
+}
+
+func unzipDigisparkInstaller(dirName string, zipFile string) {
+	err := Unzip(zipFile, dirName)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func runDigisparkInstaller() {
-	fmt.Println("run digispark installer here...")
+	switch runtime.GOOS {
+	case "linux":
+		cmd := exec.Command(gortDirName() + "/littlewireLoader_v13")
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+	case "darwin":
+		cmd := exec.Command(gortDirName() + "/littlewireLoader_v13")
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+	default:
+		cmd := exec.Command(gortDirName() + "/littlewireLoader_v13.exe")
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Run()
+	}
 }
 
-func downloadFromUrl(dirName string, url string) {
+func downloadFromUrl(dirName string, url string) string {
 	tokens := strings.Split(url, "/")
 	fileName := tokens[len(tokens)-1]
 	fmt.Println("Downloading", url, "to", fileName)
@@ -136,32 +171,37 @@ func downloadFromUrl(dirName string, url string) {
 	output, err := os.Create(dirName + "/" + fileName)
 	if err != nil {
 		fmt.Println("Error while creating", fileName, "-", err)
-		return
+		return ""
 	}
 	defer output.Close()
 
 	response, err := http.Get(url)
 	if err != nil {
 		fmt.Println("Error while downloading", url, "-", err)
-		return
+		return ""
 	}
 	defer response.Body.Close()
 
 	n, err := io.Copy(output, response.Body)
 	if err != nil {
 		fmt.Println("Error while downloading", url, "-", err)
-		return
+		return ""
 	}
 
 	fmt.Println(n, "bytes downloaded.")
+	return fileName
 }
 
-func createGortDirectory() (string, error) {
+func gortDirName() string {
 	usr, err := user.Current()
 	if err != nil {
 		log.Fatal(err)
 	}
-	dirName := usr.HomeDir + "/" + "gort"
+	return usr.HomeDir + "/" + "gort"
+}
+
+func createGortDirectory() (string, error) {
+	dirName := gortDirName()
 	fileExists, err := exists(dirName)
 	if fileExists {
 		fmt.Println("Gort lives")
@@ -169,4 +209,39 @@ func createGortDirectory() (string, error) {
 		os.Mkdir(dirName, 0777)
 	}
 	return dirName, err
+}
+
+func Unzip(src, dest string) error {
+	r, err := zip.OpenReader(src)
+	if err != nil {
+		return err
+	}
+	defer r.Close()
+
+	for _, f := range r.File {
+		rc, err := f.Open()
+		if err != nil {
+			return err
+		}
+		defer rc.Close()
+
+		path := filepath.Join(dest, f.Name)
+		if f.FileInfo().IsDir() {
+			os.MkdirAll(path, f.Mode())
+		} else {
+			f, err := os.OpenFile(
+				path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
+			if err != nil {
+				return err
+			}
+			defer f.Close()
+
+			_, err = io.Copy(f, rc)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
 }
