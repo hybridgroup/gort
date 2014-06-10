@@ -143,23 +143,18 @@ func unzipDigisparkInstaller(dirName string, zipFile string) {
 }
 
 func runDigisparkInstaller() {
+	cmd := new(exec.Cmd) 
 	switch runtime.GOOS {
 	case "linux":
-		cmd := exec.Command(gortDirName() + "/littlewireLoader_v13")
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		cmd.Run()
+		cmd = exec.Command(gortDirName() + "/littlewireLoader_v13")
 	case "darwin":
-		cmd := exec.Command(gortDirName() + "/LittleWirev13Install")
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		cmd.Run()
+		cmd = exec.Command(gortDirName() + "/LittleWirev13Install")
 	default:
-		cmd := exec.Command(gortDirName() + "/LittleWirev13Install.exe")
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		cmd.Run()
+		cmd = exec.Command(gortDirName() + "/LittleWirev13Install.exe")
 	}
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Run()
 }
 
 func downloadFromUrl(dirName string, url string) string {
