@@ -3,8 +3,11 @@ package commands
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
+	"io"
+	"net/http"
 	"os"
 	"runtime"
+	"strings"
 )
 
 func Digispark() cli.Command {
@@ -56,7 +59,6 @@ func Digispark() cli.Command {
 				fmt.Println("upload here...")
 
 			case "set-udev-rules":
-
 				if runtime.GOOS == "darwin" || runtime.GOOS == "linux" {
 					digisparkSetUdevRules()
 				} else {
@@ -104,7 +106,14 @@ func exists(path string) (bool, error) {
 }
 
 func downloadDigisparkInstaller() {
-	fmt.Println("download digispark installer here...")
+	switch runtime.GOOS {
+	case "linux":
+		downloadFromUrl("http://littlewire.cc/resources/LittleWirev13Install-Linux64.tar.gz")
+	case "darwin":
+		downloadFromUrl("http://littlewire.cc/resources/LittleWirev13Install-OSX.zip")
+	default:
+		downloadFromUrl("http://littlewire.cc/resources/LittleWirev13Install-Win.zip")
+	}
 }
 
 func extractDigisparkInstaller() {
@@ -113,4 +122,33 @@ func extractDigisparkInstaller() {
 
 func runDigisparkInstaller() {
 	fmt.Println("run digispark installer here...")
+}
+
+func downloadFromUrl(url string) {
+	tokens := strings.Split(url, "/")
+	fileName := tokens[len(tokens)-1]
+	fmt.Println("Downloading", url, "to", fileName)
+
+	// TODO: check file existence first with io.IsExist
+	output, err := os.Create(fileName)
+	if err != nil {
+		fmt.Println("Error while creating", fileName, "-", err)
+		return
+	}
+	defer output.Close()
+
+	response, err := http.Get(url)
+	if err != nil {
+		fmt.Println("Error while downloading", url, "-", err)
+		return
+	}
+	defer response.Body.Close()
+
+	n, err := io.Copy(output, response.Body)
+	if err != nil {
+		fmt.Println("Error while downloading", url, "-", err)
+		return
+	}
+
+	fmt.Println(n, "bytes downloaded.")
 }
