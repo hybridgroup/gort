@@ -10,10 +10,10 @@ import (
 func Digispark() cli.Command {
 	return cli.Command{
 		Name:  "digispark",
-		Usage: "Upload sketches to your Digispark",
+		Usage: "Configure your Digispark microcontroller",
 		Action: func(c *cli.Context) {
 			valid := false
-			for _, s := range []string{"upload", "set-udev-rules"} {
+			for _, s := range []string{"install", "upload", "set-udev-rules"} {
 				if s == c.Args().First() {
 					valid = true
 				}
@@ -34,7 +34,10 @@ func Digispark() cli.Command {
 
 			switch c.Args().First() {
 			case "install":
-				fmt.Println("install here...")
+				downloadDigisparkInstaller()
+				extractDigisparkInstaller()
+				runDigisparkInstaller()
+				return
 
 			case "upload":
 				if len(c.Args()) != 2 {
@@ -98,4 +101,16 @@ func exists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+func downloadDigisparkInstaller() {
+	fmt.Println("download digispark installer here...")
+}
+
+func extractDigisparkInstaller() {
+	fmt.Println("extract digispark installer here...")
+}
+
+func runDigisparkInstaller() {
+	fmt.Println("run digispark installer here...")
 }
