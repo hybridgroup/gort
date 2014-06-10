@@ -32,7 +32,7 @@ func Crazyflie() cli.Command {
 
 			switch c.Args().First() {
 			case "set-udev-rules":
-				if runtime.GOOS == "darwin" || runtime.GOOS == "linux" {
+				if runtime.GOOS == "linux" {
 					crazyflieSetUdevRules()
 				} else {
 					fmt.Println("No need to set-udev-rules on your OS")
