@@ -11,7 +11,7 @@ import (
 func Bluetooth() cli.Command {
 	return cli.Command{
 		Name:  "bluetooth",
-		Usage: "Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.",
+		Usage: "Pair, unpair & connect to bluetooth devices.",
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"pair", "unpair", "connect"} {

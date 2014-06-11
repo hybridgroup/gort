@@ -20,9 +20,13 @@ func Scan() cli.Command {
 				}
 			}
 
-			if valid == false {
-				fmt.Println("Invalid/no type supplied.")
+			usage := func() {
 				fmt.Println("Usage: gort scan [serial|usb|bluetooth]")
+			}
+
+			if valid == false {
+				fmt.Println("Invalid/no subcommand supplied.\n")
+				usage()
 				return
 			}
 
