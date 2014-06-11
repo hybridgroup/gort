@@ -17,6 +17,24 @@ We are going to have precompiled binaries available soon. You can also build fro
 
 The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, & Artoo, as well as frameworks such as Johnny-Five. 
 
+## Downloads
+
+### OSX
+
+https://s3.amazonaws.com/gort-io/0.1.0/gort_darwin_386
+https://s3.amazonaws.com/gort-io/0.1.0/gort_darwin_amd64
+
+### Windows
+
+https://s3.amazonaws.com/gort-io/0.1.0/gort_windows_386.exe
+https://s3.amazonaws.com/gort-io/0.1.0/gort_windows_amd64.exe
+
+### Linux
+
+https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_386
+https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_amd64
+https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_arm
+
 ## How To Use
 
 ```
@@ -28,7 +46,7 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.0.1
+   0.1.0
 
 COMMANDS:
    scan   Scan for connected devices on Serial, USB, or Bluetooth ports
@@ -83,7 +101,7 @@ cd commands && go-bindata -pkg="commands" support/... && cd ..
 
 ## Release History
 
-Version 0.0.1 - Initial Release
+Version 0.1.0 - Initial Release
 
 ## Licenses
 Gort is copyright (c) 2014 The Hybrid Group. Licensed under the Apache 2.0 license.
