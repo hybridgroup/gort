@@ -13,26 +13,30 @@ Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 [![Build Status](https://secure.travis-ci.org/hybridgroup/gort.png?branch=master)](http://travis-ci.org/hybridgroup/gort)
 
 ## Getting Started
-We are going to have precompiled binaries available soon. You can also build from source.
+We now have precompiled binaries! You can also build from source.
 
-The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, & Artoo, as well as frameworks such as Johnny-Five. 
+The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five. 
 
 ## Downloads
 
 ### OSX
 
 https://s3.amazonaws.com/gort-io/0.1.0/gort_darwin_386
+
 https://s3.amazonaws.com/gort-io/0.1.0/gort_darwin_amd64
 
 ### Windows
 
 https://s3.amazonaws.com/gort-io/0.1.0/gort_windows_386.exe
+
 https://s3.amazonaws.com/gort-io/0.1.0/gort_windows_amd64.exe
 
 ### Linux
 
 https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_386
+
 https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_amd64
+
 https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_arm
 
 ## How To Use
