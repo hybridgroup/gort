@@ -32,12 +32,7 @@ func Scan() cli.Command {
 
 			switch runtime.GOOS {
 			case "darwin":
-				cmd := exec.Command("/bin/sh", "-c", "ls /dev/tty*")
-				cmd.Stdout = os.Stdout
-				cmd.Stderr = os.Stderr
-				cmd.Run()
-
-				cmd = exec.Command("/bin/sh", "-c", "ls /dev/cu*")
+				cmd := exec.Command("/bin/sh", "-c", "ls /dev/{tty,cu}.*")
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
 				cmd.Run()
