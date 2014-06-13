@@ -50,11 +50,22 @@ func Arduino() cli.Command {
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					cmd.Run()
+				case "windows":
+					fmt.Println("Installing winavr")
+					fmt.Println("================================================================")
+					fmt.Println("== You MUST be running cmd as administrator for this to work. ==")
+					fmt.Println("================================================================")
+					dirName, _ := createGortDirectory()
+					exeFile := "https://raw.githubusercontent.com/hunterboerner/FileMirrors/master/WinAVR-20100110-install.exe"
+					fileName := downloadFromUrl(dirName, exeFile)
+					cmd := exec.Command(gortDirName() + "\\" + fileName)
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					cmd.Run()
 				default:
 					fmt.Println("OS not yet supported.")
 				}
 			case "upload":
-
 				if len(c.Args()) < 2 {
 					fmt.Println("Invalid number of arguments.")
 					usage()
@@ -76,7 +87,7 @@ func Arduino() cli.Command {
 				}
 
 				switch runtime.GOOS {
-				case "darwin", "linux":
+				case "darwin", "linux", "windows":
 					cmd := exec.Command("avrdude", "-patmega328p", "-carduino", fmt.Sprintf("-P%v", port), "-b115200", "-D", fmt.Sprintf("-Uflash:w:%v:i", hexfile))
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr

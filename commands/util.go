@@ -58,7 +58,8 @@ func gortDirName() string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return usr.HomeDir + "/" + "gort"
+
+	return usr.HomeDir + string(os.PathSeparator) + "gort"
 }
 
 func createGortDirectory() (string, error) {
