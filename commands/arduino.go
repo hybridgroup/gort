@@ -56,7 +56,7 @@ func Arduino() cli.Command {
 					fmt.Println("== You MUST be running cmd as administrator for this to work. ==")
 					fmt.Println("================================================================")
 					dirName, _ := createGortDirectory()
-					exeFile := "https://raw.githubusercontent.com/hunterboerner/FileMirrors/master/WinAVR-20100110-install.exe"
+					exeFile := "https://s3.amazonaws.com/gort-io/support/WinAVR-20100110-install.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
 					cmd := exec.Command(gortDirName() + "\\" + fileName)
 					cmd.Stdout = os.Stdout
