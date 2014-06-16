@@ -65,7 +65,7 @@ func Scan() cli.Command {
 					out, _ := exec.Command("powershell", "Get-WmiObject Win32_SerialPort", "|", "Select-Object Name, DeviceID, Description").Output()
 					fmt.Println("Connected serialport devices: ")
 					fmt.Println(string(out))
-				default :
+				default:
 					fmt.Println("Command not available on this OS.")
 				}
 			default:

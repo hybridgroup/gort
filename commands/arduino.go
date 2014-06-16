@@ -54,7 +54,7 @@ func Arduino() cli.Command {
 					_, err := exec.Command("NET", "SESSION").Output()
 					if err != nil {
 						fmt.Println("Please run cmd.exe as administrator and try again")
-				    os.Exit(1)
+						os.Exit(1)
 					}
 
 					fmt.Println("Installing winavr")
