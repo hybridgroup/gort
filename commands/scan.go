@@ -59,6 +59,15 @@ func Scan() cli.Command {
 				default:
 					fmt.Println("Device type not yet supported.")
 				}
+			case "windows":
+				switch c.Args().First() {
+				case "serial":
+					out, _ := exec.Command("powershell", "Get-WmiObject Win32_SerialPort", "|", "Select-Object Name, DeviceID, Description").Output()
+					fmt.Println("Connected serialport devices: ")
+					fmt.Println(string(out))
+				default:
+					fmt.Println("Command not available on this OS.")
+				}
 			default:
 				fmt.Println("OS not yet supported.")
 			}
