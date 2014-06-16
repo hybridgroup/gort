@@ -51,10 +51,13 @@ func Arduino() cli.Command {
 					cmd.Stderr = os.Stderr
 					cmd.Run()
 				case "windows":
+					_, err := exec.Command("NET", "SESSION").Output()
+					if err != nil {
+						fmt.Println("Please run cmd.exe as administrator and try again")
+				    os.Exit(1)
+					}
+
 					fmt.Println("Installing winavr")
-					fmt.Println("================================================================")
-					fmt.Println("== You MUST be running cmd as administrator for this to work. ==")
-					fmt.Println("================================================================")
 					dirName, _ := createGortDirectory()
 					exeFile := "https://s3.amazonaws.com/gort-io/support/WinAVR-20100110-install.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
