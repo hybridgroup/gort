@@ -50,11 +50,11 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.0
+   0.2.0
 
 COMMANDS:
    scan   Scan for connected devices on Serial, USB, or Bluetooth ports
-   bluetooth  Scan, pair, unpair bluetooth devices. Establishes serial to Bluetooth connection.
+   bluetooth  Pair, unpair & connect to bluetooth devices.
    arduino  Install avrdude, and upload sketches to your Arduino
    spark  Upload sketches to your Spark
    digispark  Configure your Digispark microcontroller
