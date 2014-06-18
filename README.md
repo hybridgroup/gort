@@ -1,6 +1,6 @@
 # Gort - Command Line Interface For RobotOps
 
-Gort (http://gort.io) is a Command Line Interface (CLI) for RobotOps. Gort provides tools to scan for connected devices, upload firmware, and more.
+Gort (http://gort.io) is a Command Line Toolkit for RobotOps. Gort provides tools to scan for connected devices, upload firmware, and more.
 
 Gort is written in the Go programming language (http://golang.org) for maximum speed and portability.
 
@@ -21,23 +21,23 @@ The Gort CLI provides many useful features on many hardware platforms, and has n
 
 ### OSX
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_darwin_386
+https://s3.amazonaws.com/gort-io/0.2.0/gort_darwin_386
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_darwin_amd64
+https://s3.amazonaws.com/gort-io/0.2.0/gort_darwin_amd64
 
 ### Windows
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_windows_386.exe
+https://s3.amazonaws.com/gort-io/0.2.0/gort_windows_386.exe
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_windows_amd64.exe
+https://s3.amazonaws.com/gort-io/0.2.0/gort_windows_amd64.exe
 
 ### Linux
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_386
+https://s3.amazonaws.com/gort-io/0.2.0/gort_linux_386
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_amd64
+https://s3.amazonaws.com/gort-io/0.2.0/gort_linux_amd64
 
-https://s3.amazonaws.com/gort-io/0.1.0/gort_linux_arm
+https://s3.amazonaws.com/gort-io/0.2.0/gort_linux_arm
 
 ## How To Use
 
@@ -104,6 +104,8 @@ cd commands && go-bindata -pkg="commands" support/... && cd ..
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+
+Version 0.2.0 - Add Windows support for Arduino, & bug fixes
 
 Version 0.1.0 - Initial Release
 
