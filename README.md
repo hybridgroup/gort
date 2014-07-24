@@ -17,27 +17,27 @@ We now have precompiled binaries! You can also build from source.
 
 The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five. 
 
-## Downloads
+## Downloads (version 0.2.1)
 
-### OSX
+### Darwin (Apple Mac)
 
-https://s3.amazonaws.com/gort-io/0.2.0/gort_darwin_386
-
-https://s3.amazonaws.com/gort-io/0.2.0/gort_darwin_amd64
-
-### Windows
-
-https://s3.amazonaws.com/gort-io/0.2.0/gort_windows_386.exe
-
-https://s3.amazonaws.com/gort-io/0.2.0/gort_windows_amd64.exe
+ * [gort\_0.2.1\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_darwin_386.zip)
+ * [gort\_0.2.1\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_darwin_amd64.zip)
 
 ### Linux
 
-https://s3.amazonaws.com/gort-io/0.2.0/gort_linux_386
+ * [gort\_0.2.1\_amd64.deb](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_amd64.deb)
+ * [gort\_0.2.1\_armhf.deb](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_armhf.deb)
+ * [gort\_0.2.1\_i386.deb](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_i386.deb)
+ * [gort\_0.2.1\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_linux_386.tar.gz)
+ * [gort\_0.2.1\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_linux_amd64.tar.gz)
+ * [gort\_0.2.1\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_linux_arm.tar.gz)
 
-https://s3.amazonaws.com/gort-io/0.2.0/gort_linux_amd64
+### MS Windows
 
-https://s3.amazonaws.com/gort-io/0.2.0/gort_linux_arm
+ * [gort\_0.2.1\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_windows_386.zip)
+ * [gort\_0.2.1\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_windows_amd64.zip)
+
 
 ## How To Use
 
@@ -50,7 +50,7 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.2.0
+   0.2.1
 
 COMMANDS:
    scan   Scan for connected devices on Serial, USB, or Bluetooth ports
