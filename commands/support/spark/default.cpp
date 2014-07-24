@@ -52,8 +52,8 @@ int sparkDigitalWrite(String command)
 
   if (command.startsWith("A")) { pinNumber += 10; }
 
-  pinMode(pinNumber + 10, OUTPUT);
-  digitalWrite(pinNumber + 10, value);
+  pinMode(pinNumber, OUTPUT);
+  digitalWrite(pinNumber, value);
 
   return 1;
 }
