@@ -121,6 +121,8 @@ Compilied binaries will now be placed in `build/<VERSION>/`
 
 ## Release History
 
+Version 0.2.1 - Update default Spark code for servo support
+
 Version 0.2.0 - Add Windows support for Arduino, & bug fixes
 
 Version 0.1.0 - Initial Release
