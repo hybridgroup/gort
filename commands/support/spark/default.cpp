@@ -76,7 +76,7 @@ int sparkAnalogWrite(String command)
   int pinNum = command.charAt(1) - '0';
   char cmdType = command.charAt(0);
 
-  if (pinNum < 0 || pinNum > 7) { return -1; }
+  if (pinNum < 0 || pinNum > 9) { return -1; }
 
   String value = command.substring(3);
 
