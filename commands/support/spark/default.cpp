@@ -73,25 +73,30 @@ int sparkAnalogRead(String pin)
 int sparkAnalogWrite(String command)
 {
   Servo myServo;
-  bool servo = false;
-  int pinNumber = command.charAt(1) - '0';
+  int pinNum = command.charAt(1) - '0';
+  char cmdType = command.charAt(0);
 
-  if (pinNumber < 0 || pinNumber > 7) { return -1; }
+  if (pinNum < 0 || pinNum > 7) { return -1; }
 
-  if (toupper(command.charAt(3)) == 'S') { servo = true; }
+  String value = command.substring(3);
 
-  String value = command.substring(5);
-
-  if (command.startsWith("A")) { pinNumber += 10; }
-
-  if (servo) {
-    myServo.attach(pinNumber);
+  if (cmdType == 'D') {
+    pinMode(pinNum, OUTPUT);
+    analogWrite(pinNum, value.toInt());
+    return 1;
+  } else if (cmdType == 'A') {
+    pinMode(pinNum + 10, OUTPUT);
+    analogWrite(pinNum + 10, value.toInt());
+    return 2;
+  } else if (cmdType == 'S') {
+    if (pinNum < 8) {
+      pinNum += 10;
+    } else if (pinNum > 7) {
+      pinNum -= 8;
+    }
+    myServo.attach(pinNum);
     myServo.write(value.toInt());
-    return 1;
-  } else {
-    pinMode(pinNumber, OUTPUT);
-    analogWrite(pinNumber, value.toInt());
-    return 1;
+    return 3;
   }
 
   return -2;
