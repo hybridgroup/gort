@@ -1,12 +1,7 @@
 package main
 
-import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-)
+import "testing"
 
-var _ = Describe("Gort", func() {
-	PIt("should have tests", func() {
-		Expect(true)
-	})
-})
+func TestGort(t *testing.T) {
+	t.SkipNow()
+}

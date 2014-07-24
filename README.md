@@ -89,6 +89,22 @@ Once installed, you build the assets into the project like this:
 cd commands && go-bindata -pkg="commands" support/... && cd ..
 ```
 
+## Release
+
+You need to have goxc installed in order to cross compile Gort:
+
+```
+go get github.com/laher/goxc
+```
+
+Once installed, you can build the binary with
+```
+make release
+```
+
+Compilied binaries will now be placed in `build/<VERSION>/`
+
+
 ## Contributing
 
 * All patches must be provided under the Apache 2.0 License
