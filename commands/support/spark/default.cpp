@@ -20,7 +20,7 @@ void setup()
   Spark.function("digitalread", sparkDigitalRead);
 
   Spark.function("analogwrite", sparkAnalogWrite);
-    Spark.function("analogread", sparkAnalogRead);
+  Spark.function("analogread", sparkAnalogRead);
 }
 
 int sparkDigitalRead(String pin)
