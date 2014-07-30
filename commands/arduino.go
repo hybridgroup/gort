@@ -2,11 +2,12 @@ package commands
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/codegangsta/cli"
 )
 
 func Arduino() cli.Command {
@@ -40,7 +41,7 @@ func Arduino() cli.Command {
 				switch runtime.GOOS {
 				case "linux":
 					fmt.Println("Attempting to install avrdude with apt-get.")
-					cmd := exec.Command("sudo", "apt-get", "install", "avrdude")
+					cmd := exec.Command("sudo", "apt-get", "-y", "install", "avrdude")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					cmd.Run()
