@@ -13,7 +13,7 @@ import (
 func Arduino() cli.Command {
 	return cli.Command{
 		Name:  "arduino",
-		Usage: "Install avrdude, and upload sketches to your Arduino",
+		Usage: "Install avrdude, and upload HEX files to your Arduino",
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"scan", "install", "upload"} {
