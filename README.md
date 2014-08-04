@@ -17,26 +17,26 @@ We now have precompiled binaries! You can also build from source.
 
 The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five. 
 
-## Downloads (version 0.2.1)
+## Downloads (version 0.2.2)
 
 ### Darwin (Apple Mac)
 
- * [gort\_0.2.1\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_darwin_386.zip)
- * [gort\_0.2.1\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_darwin_amd64.zip)
+ * [gort\_0.2.2\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_darwin_386.zip)
+ * [gort\_0.2.2\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_darwin_amd64.zip)
 
 ### Linux
 
- * [gort\_0.2.1\_amd64.deb](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_amd64.deb)
- * [gort\_0.2.1\_armhf.deb](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_armhf.deb)
- * [gort\_0.2.1\_i386.deb](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_i386.deb)
- * [gort\_0.2.1\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_linux_386.tar.gz)
- * [gort\_0.2.1\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_linux_amd64.tar.gz)
- * [gort\_0.2.1\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_linux_arm.tar.gz)
+ * [gort\_0.2.2\_amd64.deb](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_amd64.deb)
+ * [gort\_0.2.2\_armhf.deb](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_armhf.deb)
+ * [gort\_0.2.2\_i386.deb](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_i386.deb)
+ * [gort\_0.2.2\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_linux_386.tar.gz)
+ * [gort\_0.2.2\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_linux_amd64.tar.gz)
+ * [gort\_0.2.2\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_linux_arm.tar.gz)
 
 ### MS Windows
 
- * [gort\_0.2.1\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_windows_386.zip)
- * [gort\_0.2.1\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.1/gort_0.2.1_windows_amd64.zip)
+ * [gort\_0.2.2\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_windows_386.zip)
+ * [gort\_0.2.2\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.2/gort_0.2.2_windows_amd64.zip)
 
 
 ## How To Use
@@ -50,7 +50,7 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.2.1
+   0.2.2
 
 COMMANDS:
    scan   Scan for connected devices on Serial, USB, or Bluetooth ports
@@ -120,6 +120,8 @@ Compilied binaries will now be placed in `build/<VERSION>/`
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+
+Version 0.2.1 - Correct error in avdude install for Linux
 
 Version 0.2.1 - Update default Spark code for servo support
 
