@@ -41,41 +41,44 @@ func Scan() cli.Command {
 			case "linux":
 				switch c.Args().First() {
 				case "serial":
-					files, _ := ioutil.ReadDir("/dev/serial/by-id/")
-					numOfFiles := len(files)
-					if numOfFiles == 0 {
+					ports, _ := ioutil.ReadDir("/dev/serial/by-id/")
+
+					numOfPorts := len(ports)
+
+					if numOfPorts == 0 {
 						fmt.Println()
 						fmt.Println("No serial ports found.")
+						fmt.Println()
 						return
 					}
 
 					fmt.Println()
-					fmt.Println(len(files), "serial port(s) found.")
+					fmt.Println(numOfPorts, "serial port(s) found.")
 					fmt.Println()
-					cont := 1
 
-					for _, f := range files {
-						filePath, _ := filepath.EvalSymlinks("/dev/serial/by-id/" + f.Name())
-						fileName := filepath.Base(filePath)
-						deviceInfoPath := "/sys/class/tty/" + fileName + "/device/../"
-						busNumber, buserr := ioutil.ReadFile(deviceInfoPath + "busnum")
-						deviceNumber, deverr := ioutil.ReadFile(deviceInfoPath + "devnum")
+					for i, port := range ports {
+						portPath, _ := filepath.EvalSymlinks("/dev/serial/by-id/" + port.Name())
 
-						usb := []byte(nil)
-						if buserr == nil && deverr == nil {
-							usbDevice, err := exec.Command("lsusb", "-s", "00"+string(busNumber)+":00"+string(deviceNumber)).Output()
-							if err == nil {
-								usb = usbDevice
+						deviceInfoPath := "/sys/class/tty/" + filepath.Base(portPath) + "/device/../"
+
+						busNumber, busErr := ioutil.ReadFile(deviceInfoPath + "busnum")
+						deviceNumber, devErr := ioutil.ReadFile(deviceInfoPath + "devnum")
+
+						usbDevice := []byte(nil)
+						if busErr == nil && devErr == nil {
+							usb, usbErr := exec.Command("lsusb", "-s", "00"+string(busNumber)+":00"+string(deviceNumber)).Output()
+							if usbErr == nil {
+								usbDevice = usb
 							}
 						}
 
-						fmt.Printf("%d. [%s] - [%s]\n", cont, filePath, f.Name())
-						if usb != nil {
-							fmt.Println("  USB device: ", string(usb))
+						fmt.Printf("%d. [%s] - [%s]\n", i+1, portPath, port.Name())
+
+						if usbDevice != nil {
+							fmt.Println("  USB device: ", string(usbDevice))
 						}
-						cont += 1
+
 					}
-					fmt.Println()
 				case "bluetooth":
 					cmd := exec.Command("hcitool", "scan")
 					cmd.Stdout = os.Stdout
