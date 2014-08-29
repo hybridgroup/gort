@@ -3,8 +3,10 @@ package commands
 import (
 	"fmt"
 	"github.com/codegangsta/cli"
+	"io/ioutil"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 )
 
@@ -39,13 +41,41 @@ func Scan() cli.Command {
 			case "linux":
 				switch c.Args().First() {
 				case "serial":
-					dmesg := exec.Command("dmesg")
-					grep := exec.Command("grep", "tty")
-					grep.Stdin, _ = dmesg.StdoutPipe()
-					grep.Stdout = os.Stdout
-					grep.Start()
-					dmesg.Run()
-					grep.Wait()
+					files, _ := ioutil.ReadDir("/dev/serial/by-id/")
+					numOfFiles := len(files)
+					if numOfFiles == 0 {
+						fmt.Println()
+						fmt.Println("No serial ports found.")
+						return
+					}
+
+					fmt.Println()
+					fmt.Println(len(files), "serial port(s) found.")
+					fmt.Println()
+					cont := 1
+
+					for _, f := range files {
+						filePath, _ := filepath.EvalSymlinks("/dev/serial/by-id/" + f.Name())
+						fileName := filepath.Base(filePath)
+						deviceInfoPath := "/sys/class/tty/" + fileName + "/device/../"
+						busNumber, buserr := ioutil.ReadFile(deviceInfoPath + "busnum")
+						deviceNumber, deverr := ioutil.ReadFile(deviceInfoPath + "devnum")
+
+						usb := []byte(nil)
+						if buserr == nil && deverr == nil {
+							usbDevice, err := exec.Command("lsusb", "-s", "00"+string(busNumber)+":00"+string(deviceNumber)).Output()
+							if err == nil {
+								usb = usbDevice
+							}
+						}
+
+						fmt.Printf("%d. [%s] - [%s]\n", cont, filePath, f.Name())
+						if usb != nil {
+							fmt.Println("  USB device: ", string(usb))
+						}
+						cont += 1
+					}
+					fmt.Println()
 				case "bluetooth":
 					cmd := exec.Command("hcitool", "scan")
 					cmd.Stdout = os.Stdout
