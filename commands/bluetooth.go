@@ -27,6 +27,11 @@ func Bluetooth() cli.Command {
 				fmt.Println("gort bluetooth connect <dev> [hciX]\n")
 			}
 
+			if runtime.GOOS == "darwin" {
+				fmt.Println("OS X manages Bluetooth pairing/unpairing/binding itself.")
+				return
+			}
+
 			if valid == false {
 				usage()
 				return
@@ -38,8 +43,6 @@ func Bluetooth() cli.Command {
 			}
 
 			switch runtime.GOOS {
-			case "darwin":
-				fmt.Println("OS X manages Bluetooth pairing/unpairing/binding itself.")
 			case "linux":
 				switch c.Args().First() {
 				case "pair":
