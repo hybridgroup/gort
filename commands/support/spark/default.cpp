@@ -72,7 +72,6 @@ int sparkAnalogRead(String pin)
 
 int sparkAnalogWrite(String command)
 {
-  Servo myServo;
   int pinNum = command.charAt(1) - '0';
   char cmdType = command.charAt(0);
 
@@ -94,6 +93,7 @@ int sparkAnalogWrite(String command)
     } else if (pinNum > 7) {
       pinNum -= 8;
     }
+    Servo myServo;
     myServo.attach(pinNum);
     myServo.write(value.toInt());
     return 3;
