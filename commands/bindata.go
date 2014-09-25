@@ -2582,10 +2582,10 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() ([]byte, error){
-	"support/spark/voodoospark.cpp": support_spark_voodoospark_cpp,
-	"support/spark/default.cpp": support_spark_default_cpp,
-	"support/crazyflie/crazyradio.rules": support_crazyflie_crazyradio_rules,
+	"support/spark/voodoospark.cpp":        support_spark_voodoospark_cpp,
+	"support/spark/default.cpp":            support_spark_default_cpp,
+	"support/crazyflie/crazyradio.rules":   support_crazyflie_crazyradio_rules,
 	"support/digispark/micronucleus.rules": support_digispark_micronucleus_rules,
-	"support/arduino/firmata.cpp.hex": support_arduino_firmata_cpp_hex,
-	"support/arduino/rapiro.cpp.hex": support_arduino_rapiro_cpp_hex,
+	"support/arduino/firmata.cpp.hex":      support_arduino_firmata_cpp_hex,
+	"support/arduino/rapiro.cpp.hex":       support_arduino_rapiro_cpp_hex,
 }
