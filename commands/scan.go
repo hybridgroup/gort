@@ -2,12 +2,14 @@ package commands
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
+
+	"github.com/codegangsta/cli"
 )
 
 func Scan() cli.Command {
@@ -37,7 +39,9 @@ func Scan() cli.Command {
 				cmd := exec.Command("/bin/sh", "-c", "ls /dev/{tty,cu}.*")
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
-				cmd.Run()
+				if err := cmd.Run(); err != nil {
+					log.Fatal(err)
+				}
 			case "linux":
 				switch c.Args().First() {
 				case "serial":
@@ -83,12 +87,16 @@ func Scan() cli.Command {
 					cmd := exec.Command("hcitool", "scan")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
 				case "usb":
 					cmd := exec.Command("lsusb")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
 				default:
 					fmt.Println("Device type not yet supported.")
 				}

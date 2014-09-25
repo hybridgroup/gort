@@ -2,10 +2,12 @@ package commands
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
+	"log"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/codegangsta/cli"
 )
 
 func Bluetooth() cli.Command {
@@ -49,17 +51,26 @@ func Bluetooth() cli.Command {
 					cmd := exec.Command("bluez-simple-agent", hci, c.Args()[1])
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				case "unpair":
 					cmd := exec.Command("bluez-simple-agent", hci, c.Args()[1], "remove")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				case "connect":
 					cmd := exec.Command("bluez-test-serial", "-i", hci, c.Args()[1])
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				default:
 					usage()
 				}

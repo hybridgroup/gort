@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"runtime"
@@ -44,13 +45,19 @@ func Arduino() cli.Command {
 					cmd := exec.Command("sudo", "apt-get", "-y", "install", "avrdude")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				case "darwin":
 					fmt.Println("Attempting to install avrdude with Homebrew.")
 					cmd := exec.Command("brew", "install", "avrdude")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				case "windows":
 					_, err := exec.Command("NET", "SESSION").Output()
 					if err != nil {
@@ -65,7 +72,10 @@ func Arduino() cli.Command {
 					cmd := exec.Command(gortDirName() + "\\" + fileName)
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				default:
 					fmt.Println("OS not yet supported.")
 				}
@@ -95,7 +105,10 @@ func Arduino() cli.Command {
 					cmd := exec.Command("avrdude", "-patmega328p", "-carduino", fmt.Sprintf("-P%v", port), "-b115200", "-D", fmt.Sprintf("-Uflash:w:%v:i", hexfile))
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
-					cmd.Run()
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
 				default:
 					fmt.Println("OS not yet supported.")
 				}
