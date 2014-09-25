@@ -2,11 +2,12 @@ package commands
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
 	"log"
 	"os"
 	"os/exec"
 	"runtime"
+
+	"github.com/codegangsta/cli"
 )
 
 func Digispark() cli.Command {
@@ -115,7 +116,10 @@ func extractDigisparkInstaller(dirName string, zipFile string) {
 	cmd := exec.Command("tar", "-C", dirName, "-zxvf", zipFile)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Run()
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
+	}
+
 }
 
 func unzipDigisparkInstaller(dirName string, zipFile string) {
@@ -137,5 +141,8 @@ func runDigisparkInstaller() {
 	}
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Run()
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
+	}
+
 }
