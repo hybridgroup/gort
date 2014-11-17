@@ -44,7 +44,7 @@ func Bluetooth() cli.Command {
 			}
 
 			hci := "hci0"
-			if len(c.Args()) <= 3 {
+			if len(c.Args()) >= 3 {
 				hci = c.Args()[2]
 			}
 
