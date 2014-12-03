@@ -1,0 +1,114 @@
+#!/bin/sh
+
+# IP_ADDR - this target IP address using CIDR notation:
+# <target-ip>/<target-bitmask>
+#
+# For example:
+echo init started...
+
+/bin/mount -t tmpfs tmp /tmp
+/bin/mount -t proc proc /proc
+/bin/mount -o remount,rw /
+/bin/mount -t tmpfs dev /dev
+/bin/mkdir -p /dev/shm /dev/pts
+/bin/mount -t devpts devpts /dev/pts
+/bin/mount -t sysfs sys /sys
+
+#don't allow overcommit (allocate more memory that the physical one)
+echo 1 > /proc/sys/vm/overcommit_memory
+echo 90 > /proc/sys/vm/overcommit_ratio
+
+#in case of unaligned access print a message and send a SIGBUS
+echo 5 > /proc/cpu/alignment
+
+#reboot after 1s after a panic
+echo 1 > /proc/sys/kernel/panic
+
+#panic when an oops or BUG is encountered
+#disable this for developer
+echo 1 > /proc/sys/kernel/panic_on_oops
+
+#disable PM on all UARTs 
+echo 0 > /sys/devices/platform/omap-hsuart.0/sleep_timeout
+echo 0 > /sys/devices/platform/omap-hsuart.1/sleep_timeout
+echo 0 > /sys/devices/platform/omap-hsuart.2/sleep_timeout
+echo 0 > /sys/devices/platform/omap-hsuart.3/sleep_timeout
+echo -1 > /proc/sys/kernel/sched_rt_runtime_us
+
+echo "/sbin/mdev" > /proc/sys/kernel/hotplug
+/sbin/mdev -s
+
+mount -t usbfs none /proc/bus/usb
+
+/bin/mkdir -p /update
+/bin/mount -a
+/bin/mkdir -p /data/video
+
+# Enable core dump if needed
+CORE_SETTING=/etc/coredump_enabled
+if [ -e $CORE_SETTING ]
+then
+  if [ "`cat $CORE_SETTING`" = "yes" ]
+  then
+	echo "|/bin/dd of=/data/video/usb/core_%p_%e" > /proc/sys/kernel/core_pattern
+  ulimit -c unlimited
+  fi
+fi
+
+# Disabling Atheros Wifi chip
+/usr/sbin/gpio 86 -d lo 0
+# Atheros Warm reset forced to 0
+/usr/sbin/gpio 85 -d lo 0
+# enabling 5V power supply
+/usr/sbin/gpio 89 -d lo 0
+# Enabling Atheros Wifi chip
+/usr/sbin/gpio 86 -d ho 1
+
+
+/bin/hostname -F /etc/hostname
+/sbin/ifconfig lo 127.0.0.1 up
+/sbin/route add -net 127.0.0.0 netmask 255.0.0.0 lo
+/sbin/ifconfig usb0 192.168.2.1 netmask 255.255.255.0 up
+
+/bin/dspbridge/cexec.out -T /bin/dsp/baseimage.dof
+/bin/dspbridge/dynreg.out -r /bin/dsp/720p_h264venc_sn.dll64P 
+/bin/dspbridge/dynreg.out -r /bin/dsp/usn.dll64P 
+
+export DSP_PATH=/bin/dsp
+
+#smart reflex : set margins provided by TI
+echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1000000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 2 > /sys/power/sr_steps_1g
+echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1000000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo 1000000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+
+# Initialize a list of arguments to pass to program.elf
+echo "" > /tmp/.program.elf.arguments
+echo "-360p.slices 0" >> /tmp/.program.elf.arguments
+echo "-live.tcp"      >> /tmp/.program.elf.arguments
+
+#/bin/ltt.sh
+#/bin/start_trace.sh 1
+/bin/wifi_setup.sh&
+/sbin/udevd.sh
+source /bin/parallel-stream.sh
+#disabling kernel messages
+echo 0 > /proc/sysrq-trigger
+/bin/factory_reset_cb&
+/bin/memory_check.sh &
+# Start a proxy which executes Bash commands from program.elf
+mkfifo /tmp/.bashproxyfifo
+/bin/bashproxy /tmp/.bashproxyfifo &
+# Copying licenses file to ftp directory so it can be seen by users.
+cp /licenses/* /data/video
+export I2C_DEVICE=/dev/i2c-1                                                                                                                                                
+i2c_cmd 0x48 0x19 0x02
+/bin/init_gpios.sh
+/bin/check_update.sh
+
+sleep 10
+/data/video/ardrone_commander&
+echo end init...
