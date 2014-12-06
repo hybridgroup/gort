@@ -73,9 +73,9 @@ func droneDropSupportDir() string {
 
 func downloadDroneDropFirmware() {
 	dir := droneDropSupportDir()
-	downloadFromUrl(dir, "https://dl.dropboxusercontent.com/u/7868816/ardrone_commander")
-	downloadFromUrl(dir, "https://dl.dropboxusercontent.com/u/7868816/configure_drone_drop.sh")
-	downloadFromUrl(dir, "https://dl.dropboxusercontent.com/u/7868816/uninstall_drone_drop.sh")
+	downloadFromUrl(dir, "https://github.com/hybridgroup/dronedrop-ardrone/raw/master/ardrone_commander")
+	downloadFromUrl(dir, "https://github.com/hybridgroup/dronedrop-ardrone/raw/master/configure_drone_drop.sh")
+	downloadFromUrl(dir, "https://github.com/hybridgroup/dronedrop-ardrone/raw/master/uninstall_drone_drop.sh")
 }
 
 func uninstallDroneDrop() {
