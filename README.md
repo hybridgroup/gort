@@ -17,32 +17,31 @@ We now have precompiled binaries! You can also build from source.
 
 The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five. 
 
-## Downloads (version 0.2.4)
+## Downloads (version 0.3.0)
 
 ### Darwin (Apple Mac)
 
- * [gort\_0.2.4\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_darwin_386.zip)
- * [gort\_0.2.4\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_darwin_amd64.zip)
-
+ * [gort\_0.3.0\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_darwin_386.zip)
+ * [gort\_0.3.0\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_darwin_amd64.zip)
+ 
 ### Linux
 
- * [gort\_0.2.4\_amd64.deb](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_amd64.deb)
- * [gort\_0.2.4\_armhf.deb](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_armhf.deb)
- * [gort\_0.2.4\_i386.deb](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_i386.deb)
- * [gort\_0.2.4\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_linux_386.tar.gz)
- * [gort\_0.2.4\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_linux_amd64.tar.gz)
- * [gort\_0.2.4\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_linux_arm.tar.gz)
+ * [gort\_0.3.0\_amd64.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_amd64.deb)
+ * [gort\_0.3.0\_armhf.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_armhf.deb)
+ * [gort\_0.3.0\_i386.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_i386.deb)
+ * [gort\_0.3.0\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_386.tar.gz)
+ * [gort\_0.3.0\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_amd64.tar.gz)
+ * [gort\_0.3.0\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_arm.tar.gz)
+ 
+### MS Windows                                            
 
-### MS Windows
-
- * [gort\_0.2.4\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_windows_386.zip)
- * [gort\_0.2.4\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.2.4/gort_0.2.4_windows_amd64.zip)
-
-
+ * [gort\_0.3.0\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_windows_386.zip)
+ * [gort\_0.3.0\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_windows_amd64.zip)
+ 
 ## How To Use
 
 ```
-$ ./gort
+$ gort
 NAME:
    gort - Command Line Utility for RobotOps
 
@@ -50,21 +49,23 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.2.4
+   0.3.0
 
 COMMANDS:
-   scan   Scan for connected devices on Serial, USB, or Bluetooth ports
-   bluetooth  Pair, unpair & connect to bluetooth devices.
-   arduino  Install avrdude, and upload sketches to your Arduino
-   spark  Upload sketches to your Spark
-   digispark  Configure your Digispark microcontroller
-   crazyflie  Configure your Crazyflie
-   klaatu barada nikto
-   help, h  Shows a list of commands or help for one command
+   scan         Scan for connected devices on Serial, USB, or Bluetooth ports
+   bluetooth    Pair, unpair & connect to bluetooth devices.
+   arduino      Install avrdude, and upload HEX files to your Arduino
+   spark        Upload sketches to your Spark
+   digispark    Configure your Digispark microcontroller
+   crazyflie    Configure your Crazyflie
+   klaatu       barada nikto
+   dronedrop    Install, uninstall, update and download dronedrop firmware
+   help, h      Shows a list of commands or help for one command
    
 GLOBAL OPTIONS:
-   --version, -v  print the version
-   --help, -h   show help
+   --help, -h           show help
+   --version, -v        print the version
+   
 ```
 
 Scan for connected serial devices:
@@ -120,6 +121,7 @@ Compilied binaries will now be placed in `build/<VERSION>/`
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+Version 0.3.0 - Add dronedrop commands
 
 Version 0.2.4 - Update voodoospark to 2.3.1 and bug fixes
 
