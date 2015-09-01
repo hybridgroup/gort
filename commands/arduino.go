@@ -102,7 +102,7 @@ func Arduino() cli.Command {
 
 				switch runtime.GOOS {
 				case "darwin", "linux", "windows":
-					cmd := exec.Command("avrdude", "-patmega328p", "-carduino", fmt.Sprintf("-P%v", port), "-b115200", "-D", fmt.Sprintf("-Uflash:w:%v:i", hexfile))
+					cmd := exec.Command("avrdude", "-patmega328p", "-carduino", fmt.Sprintf("-P%v", port), "-b57600", "-D", fmt.Sprintf("-Uflash:w:%v:i", hexfile))
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
