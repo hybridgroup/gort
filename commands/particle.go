@@ -12,10 +12,10 @@ import (
 	"path"
 )
 
-func Spark() cli.Command {
+func Particle() cli.Command {
 	return cli.Command{
-		Name:  "spark",
-		Usage: "Upload sketches to your Spark",
+		Name:  "particle",
+		Usage: "Upload sketches to your Particle Photon",
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"upload"} {
@@ -27,7 +27,7 @@ func Spark() cli.Command {
 			usage := func() {
 				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
-				fmt.Println("  gort spark upload [accessToken] [deviceId] [default|voodoospark|path name] # uploads sketch to Spark")
+				fmt.Println("  gort particle upload <accessToken> <deviceId> <default|voodoospark|path name> # uploads sketch to Particle Photon")
 			}
 
 			if valid == false {

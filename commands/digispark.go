@@ -25,7 +25,7 @@ func Digispark() cli.Command {
 			usage := func() {
 				fmt.Println("Usage:")
 				fmt.Println("  gort digispark install # installs software to upload firmware to Digispark")
-				fmt.Println("  gort digispark upload [littlewire] # uploads firmware to Digispark")
+				fmt.Println("  gort digispark upload <littlewire> # uploads firmware to Digispark")
 				fmt.Println("  gort digispark set-udev-rules # set udev rules needed to connect to Digispark")
 			}
 
