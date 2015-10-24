@@ -27,9 +27,9 @@ func Arduino() cli.Command {
 				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
 				fmt.Println("  gort arduino install                                  # installs avrdude to allow uploading of sketches to Arduino")
-				fmt.Println("  gort arduino upload firmata [port]                    # uploads Firmata sketch to Arduino")
-				fmt.Println("  gort arduino upload rapiro [port]                     # uploads Rapiro sketch to Arduino")
-				fmt.Println("  gort arduino upload [custom-firmware-filename] [port] # uploads a custom sketch to Arduino")
+				fmt.Println("  gort arduino upload firmata <port>                    # uploads Firmata sketch to Arduino")
+				fmt.Println("  gort arduino upload rapiro <port>                     # uploads Rapiro sketch to Arduino")
+				fmt.Println("  gort arduino upload <custom-firmware-filename> <port> # uploads a custom sketch to Arduino")
 			}
 
 			if valid == false {

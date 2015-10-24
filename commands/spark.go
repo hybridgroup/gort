@@ -27,7 +27,7 @@ func Spark() cli.Command {
 			usage := func() {
 				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
-				fmt.Println("  gort spark upload [accessToken] [deviceId] [default|voodoospark|path name] # uploads sketch to Spark")
+				fmt.Println("  gort spark upload <accessToken> <deviceId> <default|voodoospark|path name> # uploads sketch to Spark")
 			}
 
 			if valid == false {

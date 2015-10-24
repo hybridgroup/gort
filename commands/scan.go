@@ -25,7 +25,7 @@ func Scan() cli.Command {
 			}
 
 			usage := func() {
-				fmt.Println("Usage: gort scan [serial|usb|bluetooth]")
+				fmt.Println("Usage: gort scan <serial|usb|bluetooth>")
 			}
 
 			if valid == false {
@@ -84,7 +84,12 @@ func Scan() cli.Command {
 
 					}
 				case "bluetooth":
-					cmd := exec.Command("hcitool", "scan")
+					hci := "hci0"
+					if len(c.Args()) >= 3 {
+						hci = c.Args()[2]
+					}
+
+					cmd := exec.Command("hcitool", "-i", hci, "scan")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
