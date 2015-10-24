@@ -16,7 +16,7 @@ func Bluetooth() cli.Command {
 		Usage: "Pair, unpair & connect to bluetooth devices.",
 		Action: func(c *cli.Context) {
 			valid := false
-			for _, s := range []string{"connect", "disconnect"} {
+			for _, s := range []string{"pair", "connect", "unpair"} {
 				if s == c.Args().First() {
 					valid = true
 				}
@@ -24,8 +24,9 @@ func Bluetooth() cli.Command {
 			usage := func() {
 				fmt.Println("Invalid/no subcommand supplied.")
 				fmt.Println("Usage:")
-				fmt.Println("gort bluetooth connect <address> [hciX]")
-				fmt.Println("gort bluetooth disconnect <address> [hciX]")
+				fmt.Println("gort bluetooth pair <address> [hciX]")
+				fmt.Println("gort bluetooth connect <port> <address> [hciX]")
+				fmt.Println("gort bluetooth unpair <address> [hciX]")
 			}
 
 			if runtime.GOOS == "darwin" {
@@ -43,23 +44,40 @@ func Bluetooth() cli.Command {
 			}
 
 			hci := "hci0"
-			if len(c.Args()) >= 3 {
-				hci = c.Args()[2]
-			}
 
 			switch runtime.GOOS {
 			case "linux":
 				switch c.Args().First() {
-				case "connect":
-					cmd := exec.Command("bt-device", "-a", hci, "-c", c.Args()[1])
+				case "pair":
+					if len(c.Args()) >= 3 {
+						hci = c.Args()[2]
+					}
+
+					cmd := exec.Command("hcitool", "-i", hci, "cc", c.Args()[1])
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
 						log.Fatal(err)
 					}
 
-				case "disconnect":
-					cmd := exec.Command("bt-device", "-a", hci, "-d", c.Args()[1])
+				case "connect":
+					if len(c.Args()) >= 4 {
+						hci = c.Args()[3]
+					}
+
+					cmd := exec.Command("rfcomm", "-i", hci, "connect", c.Args()[1], c.Args()[2])
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+
+				case "unpair":
+					if len(c.Args()) >= 3 {
+						hci = c.Args()[2]
+					}
+
+					cmd := exec.Command("hcitool", "-i", hci, "cc", c.Args()[1])
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
