@@ -1,10 +1,9 @@
 package main
 
 import (
-	"os"
-
 	"github.com/codegangsta/cli"
 	"github.com/hybridgroup/gort/commands"
+	"os"
 )
 
 func main() {
@@ -20,7 +19,6 @@ func main() {
 		commands.Digispark(),
 		commands.Crazyflie(),
 		commands.Klaatu(),
-		commands.DroneDrop(),
 	}
 	app.Run(os.Args)
 }
