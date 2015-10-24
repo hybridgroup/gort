@@ -15,7 +15,7 @@ func main() {
 		commands.Scan(),
 		commands.Bluetooth(),
 		commands.Arduino(),
-		commands.Spark(),
+		commands.Particle(),
 		commands.Digispark(),
 		commands.Crazyflie(),
 		commands.Klaatu(),
