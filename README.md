@@ -15,7 +15,7 @@ Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 ## Getting Started
 We now have precompiled binaries! You can also build from source.
 
-The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five. 
+The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five.
 
 ## Downloads (version 0.3.0)
 
@@ -23,7 +23,7 @@ The Gort CLI provides many useful features on many hardware platforms, and has n
 
  * [gort\_0.3.0\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_darwin_386.zip)
  * [gort\_0.3.0\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_darwin_amd64.zip)
- 
+
 ### Linux
 
  * [gort\_0.3.0\_amd64.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_amd64.deb)
@@ -32,12 +32,12 @@ The Gort CLI provides many useful features on many hardware platforms, and has n
  * [gort\_0.3.0\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_386.tar.gz)
  * [gort\_0.3.0\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_amd64.tar.gz)
  * [gort\_0.3.0\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_arm.tar.gz)
- 
+
 ### MS Windows                                            
 
  * [gort\_0.3.0\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_windows_386.zip)
  * [gort\_0.3.0\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_windows_amd64.zip)
- 
+
 ## How To Use
 
 ```
@@ -61,11 +61,11 @@ COMMANDS:
    klaatu       barada nikto
    dronedrop    Install, uninstall, update and download dronedrop firmware
    help, h      Shows a list of commands or help for one command
-   
+
 GLOBAL OPTIONS:
    --help, -h           show help
    --version, -v        print the version
-   
+
 ```
 
 Scan for connected serial devices:
@@ -121,11 +121,15 @@ Compilied binaries will now be placed in `build/<VERSION>/`
   * For git help see [progit](http://git-scm.com/book) which is an awesome (and free) book on git
 
 ## Release History
+Version 0.4.1 - Corrections for bad merge
+
+Version 0.4.0 - Bluetooth commands use pure hcitool/rfcomm to avoid dependencies on Linux, Spark is now Particle, remove dronedrop commands
+
 Version 0.3.0 - Add dronedrop commands
 
 Version 0.2.4 - Update voodoospark to 2.3.1 and bug fixes
 
-Version 0.2.3 - Update Windows compatibility and default Spark code 
+Version 0.2.3 - Update Windows compatibility and default Spark code
 
 Version 0.2.2 - Correct error in avdude install for Linux
 
@@ -136,7 +140,7 @@ Version 0.2.0 - Add Windows support for Arduino, & bug fixes
 Version 0.1.0 - Initial Release
 
 ## Licenses
-Gort is copyright (c) 2014 The Hybrid Group. Licensed under the Apache 2.0 license.
+Gort is copyright (c) 2014-2015 The Hybrid Group. Licensed under the Apache 2.0 license.
 
 Firmata is copyright (c) 2006-2008 Hans-Christoph Steiner. Licensed under GNU Lesser General Public License. All rights reserved.
 
