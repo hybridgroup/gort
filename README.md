@@ -49,17 +49,16 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.3.0
+   0.4.1
 
 COMMANDS:
    scan         Scan for connected devices on Serial, USB, or Bluetooth ports
    bluetooth    Pair, unpair & connect to bluetooth devices.
    arduino      Install avrdude, and upload HEX files to your Arduino
-   spark        Upload sketches to your Spark
+   particle     Upload sketches to your Particle Photon
    digispark    Configure your Digispark microcontroller
    crazyflie    Configure your Crazyflie
    klaatu       barada nikto
-   dronedrop    Install, uninstall, update and download dronedrop firmware
    help, h      Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
@@ -71,7 +70,7 @@ GLOBAL OPTIONS:
 Scan for connected serial devices:
 
 ```
-$ ./gort scan serial
+$ gort scan serial
 [    0.000000] console [tty0] enabled
 ```
 

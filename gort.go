@@ -20,7 +20,6 @@ func main() {
 		commands.Digispark(),
 		commands.Crazyflie(),
 		commands.Klaatu(),
-		commands.DroneDrop(),
 	}
 	app.Run(os.Args)
 }
