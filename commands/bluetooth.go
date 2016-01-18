@@ -25,7 +25,7 @@ func Bluetooth() cli.Command {
 				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
 				fmt.Println("gort bluetooth pair <address> [hciX]")
-				fmt.Println("gort bluetooth connect <port> <address> [hciX]")
+				fmt.Println("gort bluetooth connect <address> [port] [hciX]")
 				fmt.Println("gort bluetooth unpair <address> [hciX]")
 			}
 
@@ -61,11 +61,17 @@ func Bluetooth() cli.Command {
 					}
 
 				case "connect":
+					port := "rfcomm0"
+
 					if len(c.Args()) >= 4 {
 						hci = c.Args()[3]
 					}
 
-					cmd := exec.Command("rfcomm", "-i", hci, "connect", c.Args()[1], c.Args()[2])
+					if len(c.Args()) >= 3 {
+						port = c.Args()[2]
+					}
+
+					cmd := exec.Command("rfcomm", "-i", hci, "connect", port, c.Args()[1])
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
