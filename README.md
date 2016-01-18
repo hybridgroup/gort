@@ -17,26 +17,9 @@ We now have precompiled binaries! You can also build from source.
 
 The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five.
 
-## Downloads (version 0.3.0)
+## Download
 
-### Darwin (Apple Mac)
-
- * [gort\_0.3.0\_darwin\_386.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_darwin_386.zip)
- * [gort\_0.3.0\_darwin\_amd64.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_darwin_amd64.zip)
-
-### Linux
-
- * [gort\_0.3.0\_amd64.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_amd64.deb)
- * [gort\_0.3.0\_armhf.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_armhf.deb)
- * [gort\_0.3.0\_i386.deb](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_i386.deb)
- * [gort\_0.3.0\_linux\_386.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_386.tar.gz)
- * [gort\_0.3.0\_linux\_amd64.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_amd64.tar.gz)
- * [gort\_0.3.0\_linux\_arm.tar.gz](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_linux_arm.tar.gz)
-
-### MS Windows                                            
-
- * [gort\_0.3.0\_windows\_386.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_windows_386.zip)
- * [gort\_0.3.0\_windows\_amd64.zip](https://s3.amazonaws.com/gort-io/0.3.0/gort_0.3.0_windows_amd64.zip)
+Just want to download a binary of the latest release? Get version 0.4.1 for OSX, Windows, and Linux from our web site at [http://gort.io/documentation/getting_started/downloads/](http://gort.io/documentation/getting_started/downloads/)
 
 ## How To Use
 
@@ -139,7 +122,7 @@ Version 0.2.0 - Add Windows support for Arduino, & bug fixes
 Version 0.1.0 - Initial Release
 
 ## Licenses
-Gort is copyright (c) 2014-2015 The Hybrid Group. Licensed under the Apache 2.0 license.
+Gort is copyright (c) 2014-2016 The Hybrid Group. Licensed under the Apache 2.0 license.
 
 Firmata is copyright (c) 2006-2008 Hans-Christoph Steiner. Licensed under GNU Lesser General Public License. All rights reserved.
 
