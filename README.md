@@ -94,6 +94,8 @@ For our contribution guidelines, please go to [https://github.com/hybridgroup/go
 ).
 
 ## Release History
+Version 0.5.0 - Adds board-type flag to Arduino upload command to support many more kinds of boards, refactor Bluetooth command params to be in a more logical order
+
 Version 0.4.1 - Corrections for bad merge
 
 Version 0.4.0 - Bluetooth commands use pure hcitool/rfcomm to avoid dependencies on Linux, Spark is now Particle, remove dronedrop commands
