@@ -11,10 +11,39 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+func uploadParams(board string) (string, string) {
+	switch board {
+	case "m328", "uno", "nano", "mini", "ethernet", "fio":
+		return "arduino", "m328p"
+
+	case "m168", "diecimila", "stamp":
+		return "arduino", "m168"
+
+	case "mega", "mega1280":
+		return "arduino", "m1280"
+
+	case "mega2560", "megaADK":
+		return "stk500v2", "m2560"
+
+	case "leonardo", "robot", "micro", "esplora":
+		return "avr109", "atmega32u4"
+
+	default:
+		return "arduino", "m328p"
+	}
+}
+
 func Arduino() cli.Command {
 	return cli.Command{
 		Name:  "arduino",
 		Usage: "Install avrdude, and upload HEX files to your Arduino",
+		Flags: []cli.Flag {
+		  cli.StringFlag{
+		    Name: "board, b",
+		    Value: "uno",
+		    Usage: "board type of arduino",
+		  },
+		},
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"scan", "install", "upload"} {
@@ -26,10 +55,22 @@ func Arduino() cli.Command {
 			usage := func() {
 				fmt.Println("Invalid/no subcommand supplied.\n")
 				fmt.Println("Usage:")
-				fmt.Println("  gort arduino install                                  # installs avrdude to allow uploading of sketches to Arduino")
-				fmt.Println("  gort arduino upload firmata <port>                    # uploads Firmata sketch to Arduino")
-				fmt.Println("  gort arduino upload rapiro <port>                     # uploads Rapiro sketch to Arduino")
-				fmt.Println("  gort arduino upload <custom-firmware-filename> <port> # uploads a custom sketch to Arduino")
+				fmt.Println("  # installs avrdude to allow uploading of sketches to Arduino")
+				fmt.Println("  gort arduino install")
+				fmt.Println()
+				fmt.Println("  # uploads Firmata sketch to Arduino")
+				fmt.Println("  gort arduino upload firmata <port> [flags]")
+				fmt.Println()
+				fmt.Println("  # uploads Rapiro sketch to Arduino")
+				fmt.Println("  gort arduino upload rapiro <port> [flags]")
+				fmt.Println()
+				fmt.Println("  # uploads a custom sketch to Arduino")
+				fmt.Println("  gort arduino upload <custom-firmware-filename> <port> [flags]")
+				fmt.Println()
+				fmt.Println("    upload flags:")
+				fmt.Println("      -b < m328 | uno | nano | mini | ethernet | fio | m168 |")
+				fmt.Println("           diecimila | stamp | mega | mega1280 | mega2560 | megaADK |")
+				fmt.Println("           leonardo | robot | micro | esplora >")
 			}
 
 			if valid == false {
@@ -89,6 +130,7 @@ func Arduino() cli.Command {
 				hexfile := c.Args()[1]
 				port := c.Args()[2]
 				file, _ := ioutil.TempFile(os.TempDir(), "")
+				programmer, part := uploadParams(c.String("board"))
 				defer file.Close()
 				defer os.Remove(file.Name())
 
@@ -102,7 +144,7 @@ func Arduino() cli.Command {
 
 				switch runtime.GOOS {
 				case "darwin", "linux", "windows":
-					cmd := exec.Command("avrdude", "-patmega328p", "-carduino", fmt.Sprintf("-P%v", port), "-b115200", "-D", fmt.Sprintf("-Uflash:w:%v:i", hexfile))
+					cmd := exec.Command("avrdude", fmt.Sprintf("-p%v", part), fmt.Sprintf("-c%v", programmer), fmt.Sprintf("-P%v", port), "-D", fmt.Sprintf("-Uflash:w:%v:i", hexfile))
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
