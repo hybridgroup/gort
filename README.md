@@ -86,6 +86,10 @@ make release
 
 Compilied binaries will now be placed in `build/<VERSION>/`
 
+You will probably need to set
+
+`export GOBIN=$GOPATH/bin` in order to run the build.
+
 
 ## Contributing
 For our contribution guidelines, please go to [https://github.com/hybridgroup/gort/blob/master/CONTRIBUTING.md
