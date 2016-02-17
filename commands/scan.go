@@ -29,7 +29,8 @@ func Scan() cli.Command {
 			}
 
 			if valid == false {
-				fmt.Println("Invalid/no subcommand supplied.\n")
+				fmt.Println("Invalid/no subcommand supplied.")
+				fmt.Println()
 				usage()
 				return
 			}

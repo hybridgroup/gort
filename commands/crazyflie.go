@@ -20,7 +20,8 @@ func Crazyflie() cli.Command {
 			}
 
 			usage := func() {
-				fmt.Println("Invalid/no subcommand supplied.\n")
+				fmt.Println("Invalid/no subcommand supplied.")
+				fmt.Println()
 				fmt.Println("Usage:")
 				fmt.Println("  gort crazyflie set-udev-rules # set udev rules needed to connect to Crazyflie")
 			}

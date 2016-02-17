@@ -30,7 +30,7 @@ func Digispark() cli.Command {
 			}
 
 			if valid == false {
-				fmt.Println("Invalid/no subcommand supplied.\n")
+				fmt.Println("Invalid/no subcommand supplied.")
 				usage()
 				return
 			}

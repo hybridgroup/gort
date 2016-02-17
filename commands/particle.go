@@ -25,7 +25,8 @@ func Particle() cli.Command {
 			}
 
 			usage := func() {
-				fmt.Println("Invalid/no subcommand supplied.\n")
+				fmt.Println("Invalid/no subcommand supplied.")
+				fmt.Println()
 				fmt.Println("Usage:")
 				fmt.Println("  gort particle upload <accessToken> <deviceId> <default|voodoospark|path name> # uploads sketch to Particle Photon")
 			}

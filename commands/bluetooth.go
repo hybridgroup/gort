@@ -22,7 +22,8 @@ func Bluetooth() cli.Command {
 				}
 			}
 			usage := func() {
-				fmt.Println("Invalid/no subcommand supplied.\n")
+				fmt.Println("Invalid/no subcommand supplied.")
+				fmt.Println()
 				fmt.Println("Usage:")
 				fmt.Println("gort bluetooth pair <address> [hciX]")
 				fmt.Println("gort bluetooth connect <address> [port] [hciX]")
