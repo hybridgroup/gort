@@ -32,7 +32,7 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.4.1
+   0.5.0
 
 COMMANDS:
    scan         Scan for connected devices on Serial, USB, or Bluetooth ports
@@ -47,7 +47,6 @@ COMMANDS:
 GLOBAL OPTIONS:
    --help, -h           show help
    --version, -v        print the version
-
 ```
 
 Scan for connected serial devices:
