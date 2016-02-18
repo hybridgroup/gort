@@ -19,7 +19,13 @@ The Gort CLI provides many useful features on many hardware platforms, and has n
 
 ## Download
 
-Just want to download a binary of the latest release? Get version 0.4.1 for OSX, Windows, and Linux from our web site at [http://gort.io/documentation/getting_started/downloads/](http://gort.io/documentation/getting_started/downloads/)
+Just want to download a binary for OSX, Windows, and Linux? Go to our web site at [http://gort.io/documentation/getting_started/downloads/](http://gort.io/documentation/getting_started/downloads/) for the latest release.
+
+Using Homebrew on OSX? You can install using:
+
+```
+brew install hybridgroup/tools/gort
+```
 
 ## How To Use
 
