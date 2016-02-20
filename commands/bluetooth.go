@@ -13,10 +13,10 @@ import (
 func Bluetooth() cli.Command {
 	return cli.Command{
 		Name:  "bluetooth",
-		Usage: "Pair, unpair & connect to bluetooth devices.",
+		Usage: "Connect & disconnect bluetooth devices.",
 		Action: func(c *cli.Context) {
 			valid := false
-			for _, s := range []string{"pair", "connect", "unpair"} {
+			for _, s := range []string{"connect", "serial", "disconnect"} {
 				if s == c.Args().First() {
 					valid = true
 				}
@@ -25,9 +25,9 @@ func Bluetooth() cli.Command {
 				fmt.Println("Invalid/no subcommand supplied.")
 				fmt.Println()
 				fmt.Println("Usage:")
-				fmt.Println("gort bluetooth pair <address> [hciX]")
-				fmt.Println("gort bluetooth connect <address> [port] [hciX]")
-				fmt.Println("gort bluetooth unpair <address> [hciX]")
+				fmt.Println("gort bluetooth connect <address> [hciX]")
+				fmt.Println("gort bluetooth serial <address> [port] [hciX]")
+				fmt.Println("gort bluetooth disconnect <address> [hciX]")
 			}
 
 			if runtime.GOOS == "darwin" {
@@ -49,7 +49,7 @@ func Bluetooth() cli.Command {
 			switch runtime.GOOS {
 			case "linux":
 				switch c.Args().First() {
-				case "pair":
+				case "connect":
 					if len(c.Args()) >= 3 {
 						hci = c.Args()[2]
 					}
@@ -61,7 +61,7 @@ func Bluetooth() cli.Command {
 						log.Fatal(err)
 					}
 
-				case "connect":
+				case "serial":
 					port := "rfcomm0"
 
 					if len(c.Args()) >= 4 {
@@ -79,12 +79,12 @@ func Bluetooth() cli.Command {
 						log.Fatal(err)
 					}
 
-				case "unpair":
+				case "disconnect":
 					if len(c.Args()) >= 3 {
 						hci = c.Args()[2]
 					}
 
-					cmd := exec.Command("hcitool", "-i", hci, "cc", c.Args()[1])
+					cmd := exec.Command("hcitool", "-i", hci, "dc", c.Args()[1])
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
