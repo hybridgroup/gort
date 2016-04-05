@@ -90,7 +90,7 @@ Once installed, you can build the binary with
 make release
 ```
 
-Compilied binaries will now be placed in `build/<VERSION>/`
+Compiled binaries will now be placed in `build/<VERSION>/`
 
 You will probably need to set
 

@@ -31,7 +31,7 @@ func Bluetooth() cli.Command {
 			}
 
 			if runtime.GOOS == "darwin" {
-				fmt.Println("OS X manages Bluetooth pairing/unpairing/binding itself.")
+				fmt.Println("OS X manages Bluetooth connections itself.")
 				return
 			}
 
