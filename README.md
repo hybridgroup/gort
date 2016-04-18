@@ -10,7 +10,7 @@ Want to use Javascript on Robots? Check out Cylon.js (http://cylonjs.com)
 
 Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 
-[![Build Status](https://secure.travis-ci.org/hybridgroup/gort.png?branch=master)](http://travis-ci.org/hybridgroup/gort)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/gort.png?branch=master)](http://travis-ci.org/hybridgroup/gort) [![Go Report Card](https://goreportcard.com/badge/github.com/hybridgroup/gort)](https://goreportcard.com/report/github.com/hybridgroup/gort)
 
 ## Getting Started
 We now have precompiled binaries! You can also build from source.
