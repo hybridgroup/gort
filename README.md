@@ -38,7 +38,7 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.6.0
+   0.6.1
 
 COMMANDS:
    scan         Scan for connected devices on Serial, USB, or Bluetooth ports
@@ -103,6 +103,8 @@ For our contribution guidelines, please go to [https://github.com/hybridgroup/go
 ).
 
 ## Release History
+Version 0.6.1 - Add Debian control file
+
 Version 0.6.0 - simplify and cleanup bluetooth commands
 
 Version 0.5.0 - Adds board-type flag to Arduino upload command to support many more kinds of boards, refactor Bluetooth command params to be in a more logical order
