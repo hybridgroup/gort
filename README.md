@@ -30,7 +30,7 @@ brew install hybridgroup/tools/gort
 ## How To Use
 
 ```
-$ gort
+$ ./gort
 NAME:
    gort - Command Line Utility for RobotOps
 
@@ -38,11 +38,11 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.5.0
+   0.6.0
 
 COMMANDS:
    scan         Scan for connected devices on Serial, USB, or Bluetooth ports
-   bluetooth    Pair, unpair & connect to bluetooth devices.
+   bluetooth    Connect & disconnect bluetooth devices.
    arduino      Install avrdude, and upload HEX files to your Arduino
    particle     Upload sketches to your Particle Photon
    digispark    Configure your Digispark microcontroller
@@ -103,6 +103,8 @@ For our contribution guidelines, please go to [https://github.com/hybridgroup/go
 ).
 
 ## Release History
+Version 0.6.0 - simplify and cleanup bluetooth commands
+
 Version 0.5.0 - Adds board-type flag to Arduino upload command to support many more kinds of boards, refactor Bluetooth command params to be in a more logical order
 
 Version 0.4.1 - Corrections for bad merge
