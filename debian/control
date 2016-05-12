@@ -5,7 +5,7 @@ Maintainer: Gobot <gobotio@hybridgroup.com>
 Build-Depends: debhelper (>= 9.1.0), golang-go
 Standards-Version: 3.9.4
 
-Package: goxc
+Package: gort
 Architecture: any
 Description: Command Line Toolkit for RobotOps
  Gort provides tools to scan for connected devices, upload firmware, and more
