@@ -103,6 +103,10 @@ For our contribution guidelines, please go to [https://github.com/hybridgroup/go
 ).
 
 ## Release History
+Version 0.6.3 - Update Firmata HEX file to version 2.5
+
+Version 0.6.2 - Correct Debian control file
+
 Version 0.6.1 - Add Debian control file
 
 Version 0.6.0 - simplify and cleanup bluetooth commands
