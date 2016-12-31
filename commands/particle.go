@@ -3,19 +3,20 @@ package commands
 import (
 	"bytes"
 	"fmt"
-	"github.com/codegangsta/cli"
 	"io"
 	"log"
 	"mime/multipart"
 	"net/http"
 	"os"
 	"path"
+
+	"github.com/codegangsta/cli"
 )
 
 func Particle() cli.Command {
 	return cli.Command{
 		Name:  "particle",
-		Usage: "Upload sketches to your Particle Photon",
+		Usage: "Upload sketches to your Particle Photon or Electron",
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"upload"} {
@@ -28,7 +29,7 @@ func Particle() cli.Command {
 				fmt.Println("Invalid/no subcommand supplied.")
 				fmt.Println()
 				fmt.Println("Usage:")
-				fmt.Println("  gort particle upload <accessToken> <deviceId> <default|voodoospark|path name> # uploads sketch to Particle Photon")
+				fmt.Println("  gort particle upload <accessToken> <deviceId> <default|path name> # uploads sketch to Particle Photon or Electron")
 			}
 
 			if valid == false {
@@ -47,7 +48,7 @@ func Particle() cli.Command {
 				accessToken := c.Args()[1]
 				deviceId := c.Args()[2]
 				fileName := c.Args()[3]
-				url := fmt.Sprintf("https://api.spark.io/v1/devices/%v?access_token=%v", deviceId, accessToken)
+				url := fmt.Sprintf("https://api.particle.io/v1/devices/%v?access_token=%v", deviceId, accessToken)
 				extraParams := map[string]string{}
 				request, err := newfileUploadRequest(url, extraParams, "file", fileName)
 				if err != nil {
@@ -99,9 +100,9 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
 }
 
 func openUploadFile(filePath string) ([]byte, string, error) {
-	if filePath == "default" || filePath == "voodoospark" {
+	if filePath == "default" {
 		fileName := fmt.Sprintf("%v.cpp", filePath)
-		filePath = fmt.Sprintf("support/spark/%v", fileName)
+		filePath = fmt.Sprintf("support/particle/%v", fileName)
 		data, err := Asset(filePath)
 		if err != nil {
 			return nil, "", err
