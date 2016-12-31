@@ -66,36 +66,41 @@ More help coming soon...
 
 ## Building
 
-You need to have installed go-bindata to build the file assets into Gort for a single standalone executable:
+To install the required dependencies to build gort, run:
 
 ```
-go get github.com/jteeuwen/go-bindata/...
+make deps
 ```
 
-Once installed, you build the assets into the project like this:
-```
-cd commands && go-bindata -pkg="commands" support/... && cd ..
-```
-
-## Release
-
-You need to have goxc installed in order to cross compile Gort:
+You build the assets into the project like this:
 
 ```
-go get github.com/laher/goxc
+make assets
 ```
 
-Once installed, you can build the binary with
+Then build the binary with:
+
 ```
-make release
+make build
 ```
 
 Compiled binaries will now be placed in `build/<VERSION>/`
 
-You will probably need to set
+## Release
 
-`export GOBIN=$GOPATH/bin` in order to run the build.
+When you are ready, run:
 
+```
+make release
+```
+
+For OSX users, you will also need to update the homebrew repo, located at https://github.com/hybridgroup/homebrew-tools
+
+To obtain the needed SHA values to update homebrew recipe, run:
+
+```
+make homebrew
+```
 
 ## Contributing
 For our contribution guidelines, please go to [https://github.com/hybridgroup/gort/blob/master/CONTRIBUTING.md
