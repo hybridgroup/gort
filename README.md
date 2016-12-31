@@ -38,21 +38,21 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.6.1
+   0.7.0
 
 COMMANDS:
-   scan         Scan for connected devices on Serial, USB, or Bluetooth ports
-   bluetooth    Connect & disconnect bluetooth devices.
-   arduino      Install avrdude, and upload HEX files to your Arduino
-   particle     Upload sketches to your Particle Photon
-   digispark    Configure your Digispark microcontroller
-   crazyflie    Configure your Crazyflie
-   klaatu       barada nikto
-   help, h      Shows a list of commands or help for one command
+     scan       Scan for connected devices on Serial, USB, or Bluetooth ports
+     bluetooth  Connect & disconnect bluetooth devices.
+     arduino    Install avrdude, and upload HEX files to your Arduino
+     particle   Upload sketches to your Particle Photon or Electron
+     digispark  Configure your Digispark microcontroller
+     crazyflie  Configure your Crazyflie
+     klaatu     barada nikto
+     help, h    Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --help, -h           show help
-   --version, -v        print the version
+   --help, -h     show help
+   --version, -v  print the version
 ```
 
 Scan for connected serial devices:
