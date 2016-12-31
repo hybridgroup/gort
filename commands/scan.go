@@ -18,14 +18,14 @@ func Scan() cli.Command {
 		Usage: "Scan for connected devices on Serial, USB, or Bluetooth ports",
 		Action: func(c *cli.Context) {
 			valid := false
-			for _, s := range []string{"serial", "usb", "bluetooth"} {
+			for _, s := range []string{"serial", "usb", "bluetooth", "ble"} {
 				if s == c.Args().First() {
 					valid = true
 				}
 			}
 
 			usage := func() {
-				fmt.Println("Usage: gort scan <serial|usb|bluetooth>")
+				fmt.Println("Usage: gort scan <serial|usb|bluetooth|ble>")
 			}
 
 			if valid == false {
@@ -37,6 +37,10 @@ func Scan() cli.Command {
 
 			switch runtime.GOOS {
 			case "darwin":
+				if c.Args().First() == "ble" {
+					fmt.Println("Command not available on this OS.")
+					return
+				}
 				cmd := exec.Command("/bin/sh", "-c", "ls /dev/{tty,cu}.*")
 				cmd.Stdout = os.Stdout
 				cmd.Stderr = os.Stderr
@@ -91,6 +95,18 @@ func Scan() cli.Command {
 					}
 
 					cmd := exec.Command("hcitool", "-i", hci, "scan")
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+					}
+				case "ble":
+					hci := "hci0"
+					if len(c.Args()) >= 3 {
+						hci = c.Args()[2]
+					}
+
+					cmd := exec.Command("sudo", "hcitool", "-i", hci, "lescan")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
