@@ -92,7 +92,7 @@ func supportArduinoFirmataCppHex() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/arduino/firmata.cpp.hex", size: 34406, mode: os.FileMode(436), modTime: time.Unix(1476639782, 0)}
+	info := bindataFileInfo{name: "support/arduino/firmata.cpp.hex", size: 34406, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -172,7 +172,7 @@ func supportDrone_dropRcsDronedrop() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/drone_drop/rcS.dronedrop", size: 3482, mode: os.FileMode(436), modTime: time.Unix(1445662657, 0)}
+	info := bindataFileInfo{name: "support/drone_drop/rcS.dronedrop", size: 3482, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -192,7 +192,7 @@ func supportDrone_dropRcsStock() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/drone_drop/rcS.stock", size: 3442, mode: os.FileMode(436), modTime: time.Unix(1445662657, 0)}
+	info := bindataFileInfo{name: "support/drone_drop/rcS.stock", size: 3442, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -212,7 +212,7 @@ func supportDrone_dropUsbIdsDronedrop() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/drone_drop/usb.ids.dronedrop", size: 172047, mode: os.FileMode(436), modTime: time.Unix(1445662657, 0)}
+	info := bindataFileInfo{name: "support/drone_drop/usb.ids.dronedrop", size: 172047, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -232,7 +232,7 @@ func supportDrone_dropUsbIdsStock() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/drone_drop/usb.ids.stock", size: 171980, mode: os.FileMode(436), modTime: time.Unix(1445662657, 0)}
+	info := bindataFileInfo{name: "support/drone_drop/usb.ids.stock", size: 171980, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -252,7 +252,7 @@ func supportParticleDefaultCpp() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/particle/default.cpp", size: 2171, mode: os.FileMode(436), modTime: time.Unix(1445662502, 0)}
+	info := bindataFileInfo{name: "support/particle/default.cpp", size: 2171, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -272,7 +272,7 @@ func supportParticleVoodoosparkCpp() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "support/particle/voodoospark.cpp", size: 20285, mode: os.FileMode(436), modTime: time.Unix(1445662502, 0)}
+	info := bindataFileInfo{name: "support/particle/voodoospark.cpp", size: 20285, mode: os.FileMode(436), modTime: time.Unix(1476781173, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
