@@ -108,6 +108,12 @@ For our contribution guidelines, please go to [https://github.com/hybridgroup/go
 ).
 
 ## Release History
+Version 0.7.0
+- Add Makefile tasks to simplify release process
+- Update Particle endpoints to the correct location
+- Removing unsupported software
+- Adds BLE scan for Linux
+
 Version 0.6.3 - Update Firmata HEX file to version 2.5
 
 Version 0.6.2 - Correct Debian control file
