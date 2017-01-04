@@ -79,6 +79,7 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
 	data, fileName, err := openUploadFile(path)
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
+
 	part, err := writer.CreateFormFile(paramName, fileName)
 	if err != nil {
 		return nil, err
