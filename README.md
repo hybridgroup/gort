@@ -10,7 +10,7 @@ Want to use Javascript on Robots? Check out Cylon.js (http://cylonjs.com)
 
 Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 
-[![Build Status](https://secure.travis-ci.org/hybridgroup/gort.png?branch=master)](http://travis-ci.org/hybridgroup/gort) [![Go Report Card](https://goreportcard.com/badge/github.com/hybridgroup/gort)](https://goreportcard.com/report/github.com/hybridgroup/gort) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/gort.png?branch=master)](http://travis-ci.org/hybridgroup/gort) [![Go Report Card](https://goreportcard.com/badge/github.com/hybridgroup/gort)](https://goreportcard.com/report/github.com/hybridgroup/gort) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/hybridgroup/gort/blob/master/LICENSE)
 
 
 ## Getting Started
