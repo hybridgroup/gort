@@ -17,7 +17,7 @@ Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 ## Getting Started
 We now have precompiled binaries! You can also build from source.
 
-The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & Johnny-Five.
+The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & many other libraries.
 
 ## Download
 
