@@ -101,7 +101,7 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
 
 func openUploadFile(filePath string) ([]byte, string, error) {
 	if filePath == "default" || filePath == "tinker-servo" {
-		fileName := fmt.Sprintf("%v.ino", filePath)
+		fileName := "tinker-servo.ino"
 		filePath = fmt.Sprintf("support/particle/%v", fileName)
 		data, err := Asset(filePath)
 		if err != nil {
