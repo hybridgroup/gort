@@ -29,7 +29,7 @@ func Particle() cli.Command {
 				fmt.Println("Invalid/no subcommand supplied.")
 				fmt.Println()
 				fmt.Println("Usage:")
-				fmt.Println("  gort particle upload <accessToken> <deviceId> <default|path name> # uploads sketch to Particle Photon or Electron")
+				fmt.Println("  gort particle upload <accessToken> <deviceId> <default|tinker-servo|path name> # uploads sketch to Particle Photon or Electron")
 			}
 
 			if valid == false {
@@ -100,22 +100,22 @@ func newfileUploadRequest(uri string, params map[string]string, paramName, path 
 }
 
 func openUploadFile(filePath string) ([]byte, string, error) {
-	if filePath == "default" {
-		fileName := fmt.Sprintf("%v.cpp", filePath)
+	if filePath == "default" || filePath == "tinker-servo" {
+		fileName := fmt.Sprintf("%v.ino", filePath)
 		filePath = fmt.Sprintf("support/particle/%v", fileName)
 		data, err := Asset(filePath)
 		if err != nil {
 			return nil, "", err
 		}
 		return data, fileName, nil
-	} else {
-		file, err := os.Open(filePath)
-		defer file.Close()
-		if err != nil {
-			return nil, "", err
-		}
-		data := make([]byte, 65535)
-		file.Read(data)
-		return data, path.Base(filePath), nil
 	}
+
+	file, err := os.Open(filePath)
+	defer file.Close()
+	if err != nil {
+		return nil, "", err
+	}
+	data := make([]byte, 65535)
+	file.Read(data)
+	return data, path.Base(filePath), nil
 }
