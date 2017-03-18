@@ -18,6 +18,7 @@ func main() {
 		commands.Arduino(),
 		commands.Particle(),
 		commands.Digispark(),
+		commands.Microbit(),
 		commands.Crazyflie(),
 		commands.Klaatu(),
 	}
