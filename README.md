@@ -39,7 +39,7 @@ USAGE:
    gort [global options] command [command options] [arguments...]
 
 VERSION:
-   0.7.0
+   0.8.0
 
 COMMANDS:
      scan       Scan for connected devices on Serial, USB, or Bluetooth ports
@@ -47,6 +47,7 @@ COMMANDS:
      arduino    Install avrdude, and upload HEX files to your Arduino
      particle   Upload sketches to your Particle Photon or Electron
      digispark  Configure your Digispark microcontroller
+     microbit   Install and upload firmware to your BBC Microbit
      crazyflie  Configure your Crazyflie
      klaatu     barada nikto
      help, h    Shows a list of commands or help for one command

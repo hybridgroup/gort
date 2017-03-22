@@ -1,4 +1,9 @@
 ## Release History
+Version 0.8.0
+- Reduce file size by over 25%
+- Add Microbit firmware commands
+- Improve Particle to use "tinker-servo" sketch
+
 Version 0.7.0
 - Add Makefile tasks to simplify release process
 - Update Particle endpoints to the correct location
