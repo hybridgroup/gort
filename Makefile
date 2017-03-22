@@ -6,7 +6,8 @@ assets:
 	@cd commands && go-bindata -pkg="commands" support/... && cd ..
 
 build:
-	GOBIN="$(GOPATH)/bin" goxc -d=./build -bc="linux, windows, darwin" -pv=$(VERSION)
+	GOBIN="$(GOPATH)/bin" goxc -pv=$(VERSION) -wc
+	GOBIN="$(GOPATH)/bin" goxc -c=/.goxc.json
 
 release: assets build
 

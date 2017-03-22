@@ -1,0 +1,29 @@
+{
+	"ArtifactsDest": "./build",
+	"Tasks": [
+		"default",
+		"deb-source"
+	],
+	"BuildConstraints": "linux, windows, darwin",
+	"PackageVersion": "0.7.0",
+	"TaskSettings": {
+		"deb": {
+			"metadata": {
+				"description": "Gort",
+				"maintainer": "The Hybrid Group (https://github.com/hybridgroup)"
+			},
+			"metadata-deb": {
+				"Depends": "golang",
+				"Homepage": "http://gort.io"
+			}
+		}
+	},
+	"ConfigVersion": "0.9",
+	"BuildSettings": {
+		"LdFlags": "-s -w",
+		"LdFlagsXVars": {
+			"TimeNow": "main.BUILD_DATE",
+			"Version": "main.VERSION"
+		}
+	}
+}
