@@ -5,7 +5,7 @@
 		"deb-source"
 	],
 	"BuildConstraints": "linux, windows, darwin",
-	"PackageVersion": "0.7.0",
+	"PackageVersion": "0.8.0",
 	"TaskSettings": {
 		"deb": {
 			"metadata": {

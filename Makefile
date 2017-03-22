@@ -1,4 +1,4 @@
-VERSION := $(shell sed -n 3p version.go | cut -d' ' -f4)
+VERSION := $(shell sed -n 4p version.go | cut -d' ' -f4)
 
 .PHONY: assets build homebrew
 
