@@ -8,6 +8,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+// Microbit function returns the CLI commands for gort microbit
 func Microbit() cli.Command {
 	return cli.Command{
 		Name:  "microbit",

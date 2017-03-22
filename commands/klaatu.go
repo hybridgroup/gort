@@ -2,9 +2,11 @@ package commands
 
 import (
 	"fmt"
+
 	"github.com/codegangsta/cli"
 )
 
+// Klaatu function returns the CLI commands for gort klaatu
 func Klaatu() cli.Command {
 	return cli.Command{
 		Name:  "klaatu",

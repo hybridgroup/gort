@@ -13,6 +13,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+// Particle function returns the CLI commands for gort particle
 func Particle() cli.Command {
 	return cli.Command{
 		Name:  "particle",

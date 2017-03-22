@@ -2,11 +2,13 @@ package commands
 
 import (
 	"fmt"
-	"github.com/codegangsta/cli"
 	"os"
 	"runtime"
+
+	"github.com/codegangsta/cli"
 )
 
+// Crazyflie function returns the CLI commands for gort crazyflie
 func Crazyflie() cli.Command {
 	return cli.Command{
 		Name:  "crazyflie",

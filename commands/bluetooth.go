@@ -10,6 +10,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+// Bluetooth function returns the CLI commands for gort bluetooth
 func Bluetooth() cli.Command {
 	return cli.Command{
 		Name:  "bluetooth",

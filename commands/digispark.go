@@ -10,6 +10,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+// Digispark function returns the CLI commands for gort digispark
 func Digispark() cli.Command {
 	return cli.Command{
 		Name:  "digispark",

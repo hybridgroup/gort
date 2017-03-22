@@ -12,6 +12,7 @@ import (
 	"github.com/codegangsta/cli"
 )
 
+// Scan function returns the CLI commands for gort scan
 func Scan() cli.Command {
 	return cli.Command{
 		Name:  "scan",

@@ -33,16 +33,17 @@ func uploadParams(board string) (string, string) {
 	}
 }
 
+// Arduino function returns the CLI commands for gort arduino
 func Arduino() cli.Command {
 	return cli.Command{
 		Name:  "arduino",
 		Usage: "Install avrdude, and upload HEX files to your Arduino",
-		Flags: []cli.Flag {
-		  cli.StringFlag{
-		    Name: "board, b",
-		    Value: "uno",
-		    Usage: "board type of arduino",
-		  },
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "board, b",
+				Value: "uno",
+				Usage: "board type of arduino",
+			},
 		},
 		Action: func(c *cli.Context) {
 			valid := false
