@@ -11,7 +11,7 @@ import (
 func Microbit() cli.Command {
 	return cli.Command{
 		Name:  "microbit",
-		Usage: "Install and upload firmware to your bbc: microbit",
+		Usage: "Install and upload firmware to your BBC Microbit",
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"install", "download"} {
