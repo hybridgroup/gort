@@ -4,6 +4,7 @@ import (
 	"archive/zip"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -21,6 +22,23 @@ func exists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+func copyFile(sourcePath string, destPath string) (err error) {
+	var stats os.FileInfo
+	stats, err = os.Stat(sourcePath)
+	if err != nil {
+		return
+	}
+
+	var blob []byte
+	blob, err = ioutil.ReadFile(sourcePath)
+	if err != nil {
+		return
+	}
+
+	err = ioutil.WriteFile(destPath, blob, stats.Mode())
+	return err
 }
 
 func downloadFromUrl(dirName string, url string) string {
