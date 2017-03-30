@@ -5,7 +5,7 @@
 		"deb-source"
 	],
 	"BuildConstraints": "linux, windows, darwin",
-	"PackageVersion": "0.8.0",
+	"PackageVersion": "0.8.1",
 	"TaskSettings": {
 		"deb": {
 			"metadata": {
@@ -20,7 +20,6 @@
 	},
 	"ConfigVersion": "0.9",
 	"BuildSettings": {
-		"LdFlags": "-s -w",
 		"LdFlagsXVars": {
 			"TimeNow": "main.BUILD_DATE",
 			"Version": "main.VERSION"
