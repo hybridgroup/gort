@@ -1,4 +1,4 @@
 package main
 
 // VERSION of the software
-const VERSION = "0.8.0"
+const VERSION = "0.8.1"

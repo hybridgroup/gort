@@ -1,4 +1,7 @@
 ## Release History
+Version 0.8.1
+- Go back to build without ldflags to avoid unexpected behavior
+
 Version 0.8.0
 - Reduce file size by over 25%
 - Add Microbit firmware commands
