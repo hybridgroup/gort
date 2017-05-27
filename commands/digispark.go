@@ -99,22 +99,22 @@ func downloadDigisparkInstaller() {
 	dirName, _ := createGortDirectory()
 	switch runtime.GOOS {
 	case "linux":
-		zipFile := "http://littlewire.cc/resources/LittleWirev13Install-Linux64.tar.gz"
+		zipFile := "https://s3-us-west-2.amazonaws.com/littlewire/LittleWirev13Install-Linux64.tar.gz"
 		fileName := downloadFromUrl(dirName, zipFile)
 		extractDigisparkInstaller(dirName, dirName+"/"+fileName)
 	case "darwin":
-		zipFile := "http://littlewire.cc/resources/LittleWirev13Install-OSX.zip"
+		zipFile := "https://s3-us-west-2.amazonaws.com/littlewire/LittleWirev13Install-OSX.zip"
 		fileName := downloadFromUrl(dirName, zipFile)
 		unzipDigisparkInstaller(dirName, dirName+"/"+fileName)
 	default:
-		zipFile := "http://littlewire.cc/resources/LittleWirev13Install-Win.zip"
+		zipFile := "https://s3-us-west-2.amazonaws.com/littlewire/LittleWirev13Install-Win.zip"
 		fileName := downloadFromUrl(dirName, zipFile)
 		unzipDigisparkInstaller(dirName, dirName+"/"+fileName)
 	}
 }
 
 func extractDigisparkInstaller(dirName string, zipFile string) {
-	cmd := exec.Command("tar", "-C", dirName, "-zxvf", zipFile)
+	cmd := exec.Command("tar", "-C", dirName, "-xvf", zipFile)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
