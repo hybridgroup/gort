@@ -142,7 +142,7 @@ func Scan() cli.Command {
 // osxBLEScan performs a Bluetooth LE scan on OSX
 func osxBLEScan() {
 	// first, make sure we have the scanner utility. if not d/l it
-	scannerBin := gortDirName() + "/blescanner/scanner"
+	scannerBin := gortDirName() + "/scanner"
 	fileExists, _ := exists(scannerBin)
 	if !fileExists {
 		downloadOSXBLEScanner()
@@ -161,9 +161,13 @@ func downloadOSXBLEScanner() {
 	dirName, _ := createGortDirectory()
 	zipFile := "https://s3.amazonaws.com/gort-io/support/osx/blescanner.zip"
 	fileName := downloadFromUrl(dirName, zipFile)
-	err := Unzip(fileName, dirName+"/blescanner")
+	unzipOSXScannerInstaller(dirName, dirName+"/"+fileName)
+
+}
+
+func unzipOSXScannerInstaller(dirName string, zipFile string) {
+	err := Unzip(zipFile, dirName)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
