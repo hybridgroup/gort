@@ -99,15 +99,15 @@ func downloadDigisparkInstaller() {
 	dirName, _ := createGortDirectory()
 	switch runtime.GOOS {
 	case "linux":
-		zipFile := "https://s3-us-west-2.amazonaws.com/littlewire/LittleWirev13Install-Linux64.tar.gz"
+		zipFile := "https://littlewire.github.io/resources/LittleWirev13Install-Linux64.tar.gz"
 		fileName := downloadFromUrl(dirName, zipFile)
 		extractDigisparkInstaller(dirName, dirName+"/"+fileName)
 	case "darwin":
-		zipFile := "https://s3-us-west-2.amazonaws.com/littlewire/LittleWirev13Install-OSX.zip"
+		zipFile := "https://littlewire.github.io/resources/LittleWirev13Install-OSX.zip"
 		fileName := downloadFromUrl(dirName, zipFile)
 		unzipDigisparkInstaller(dirName, dirName+"/"+fileName)
 	default:
-		zipFile := "https://s3-us-west-2.amazonaws.com/littlewire/LittleWirev13Install-Win.zip"
+		zipFile := "https://littlewire.github.io/resources/LittleWirev13Install-Win.zip"
 		fileName := downloadFromUrl(dirName, zipFile)
 		unzipDigisparkInstaller(dirName, dirName+"/"+fileName)
 	}
