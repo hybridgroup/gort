@@ -39,7 +39,7 @@ func Scan() cli.Command {
 			switch runtime.GOOS {
 			case "darwin":
 				if c.Args().First() == "ble" {
-					fmt.Println("Command not available on this OS.")
+					osxBLEScan()
 					return
 				}
 				cmd := exec.Command("/bin/sh", "-c", "ls /dev/{tty,cu}.*")
@@ -137,4 +137,33 @@ func Scan() cli.Command {
 			}
 		},
 	}
+}
+
+// osxBLEScan performs a Bluetooth LE scan on OSX
+func osxBLEScan() {
+	// first, make sure we have the scanner utility. if not d/l it
+	scannerBin := gortDirName() + "/blescanner/scanner"
+	fileExists, _ := exists(scannerBin)
+	if !fileExists {
+		downloadOSXBLEScanner()
+	}
+
+	// run the scanner
+	cmd := exec.Command(scannerBin)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func downloadOSXBLEScanner() {
+	dirName, _ := createGortDirectory()
+	zipFile := "https://s3.amazonaws.com/gort-io/support/osx/blescanner.zip"
+	fileName := downloadFromUrl(dirName, zipFile)
+	err := Unzip(fileName, dirName+"/blescanner")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
