@@ -1,4 +1,9 @@
 ## Release History
+Version 0.9.0
+- Display more useful messages on installing avrdude
+- Now able to install BLE scanner and scan for BLE devices on OS X
+- Use new location for Littlewire downloads, thanks to @kehribar
+
 Version 0.8.1
 - Go back to build without ldflags to avoid unexpected behavior
 
