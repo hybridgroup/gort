@@ -84,7 +84,7 @@ func Arduino() cli.Command {
 			case "install":
 				switch runtime.GOOS {
 				case "linux":
-					fmt.Println("Attempting to install avrdude with apt-get.")
+					fmt.Println("Attempting to install avrdude with apt-get...")
 					cmd := exec.Command("sudo", "apt-get", "-y", "install", "avrdude")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
@@ -93,7 +93,7 @@ func Arduino() cli.Command {
 					}
 
 				case "darwin":
-					fmt.Println("Attempting to install avrdude with Homebrew.")
+					fmt.Println("Attempting to install avrdude with Homebrew...")
 					cmd := exec.Command("brew", "install", "avrdude")
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
@@ -108,7 +108,8 @@ func Arduino() cli.Command {
 						os.Exit(1)
 					}
 
-					fmt.Println("Installing winavr")
+					fmt.Println("Installing winavr...")
+					fmt.Printf("Initial value for $PATH: %s\n", os.Getenv("PATH"))
 					dirName, _ := createGortDirectory()
 					exeFile := "https://s3.amazonaws.com/gort-io/support/WinAVR-20100110-install.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
