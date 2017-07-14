@@ -23,6 +23,7 @@ func main() {
 		commands.Microbit(),
 		commands.Crazyflie(),
 		commands.Klaatu(),
+		commands.Workshop(),
 	}
 	app.Run(os.Args)
 }
