@@ -39,7 +39,6 @@ func Digispark() cli.Command {
 			switch c.Args().First() {
 			case "install":
 				downloadDigisparkInstaller()
-				runDigisparkInstaller()
 				return
 
 			case "upload":
