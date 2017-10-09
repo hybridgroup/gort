@@ -96,7 +96,7 @@ func raspiInstallPiBlaster() (err error) {
 	}
 
 	fmt.Println("Attempting to build 'pi-blaster'.")
-	cmd = exec.Command("./configure && make")
+	cmd = exec.Command("sh", "-c", "./configure && make")
 	cmd.Dir = fmt.Sprintf("%v/%v", dir, "pi-blaster-master")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -105,7 +105,7 @@ func raspiInstallPiBlaster() (err error) {
 	}
 
 	fmt.Println("Attempting to install 'pi-blaster'.")
-	cmd = exec.Command("sudo make install")
+	cmd = exec.Command("sudo", "make", "install")
 	cmd.Dir = fmt.Sprintf("%v/%v", dir, "pi-blaster-master")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
