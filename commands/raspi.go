@@ -59,13 +59,26 @@ func Raspi() cli.Command {
 func raspiInstallPiBlaster() (err error) {
 	dir, _ := createGortDirectory()
 
-	fmt.Println("Attempting to install dev tools with apt-get.")
-	cmd := exec.Command("sudo", "apt-get", "-y", "install", "autoconf")
-	cmd.Dir = dir
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		log.Fatal(err)
+	var cmd *exec.Cmd
+
+	if !linuxCommandExists("autoconf") {
+		fmt.Println("Attempting to install dev tools")
+		switch getLinuxDist() {
+		case "arch":
+			cmd = exec.Command("sudo", "pacman", "-S", "--noconfirm", "autoconf")
+		case "fedora":
+			cmd = exec.Command("sudo", "yum", "-y", "install", "autoconf")
+		case "ubuntu":
+			cmd = exec.Command("sudo", "apt-get", "-y", "install", "autoconf")
+		default:
+			return fmt.Errorf("Unable to detect Linux distribution. Try installing autoconf manually first")
+		}
+		cmd.Dir = dir
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		if err := cmd.Run(); err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	fmt.Println("Attempting to fetch 'pi-blaster' from github.")
