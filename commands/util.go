@@ -2,15 +2,21 @@ package commands
 
 import (
 	"archive/zip"
+	"bufio"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"os/user"
 	"path/filepath"
 	"strings"
+)
+
+var (
+	linuxOSReleasePath = "/etc/os-release"
 )
 
 func exists(path string) (bool, error) {
@@ -139,4 +145,34 @@ func supportDir(support string) (dir string, err error) {
 		}
 	}
 	return
+}
+
+// getLinuxDist returns the name of the running Linux distribution.
+func getLinuxDist() string {
+	f, err := os.Open(linuxOSReleasePath)
+	if err != nil {
+		return ""
+	}
+	defer f.Close()
+
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		ss := strings.SplitN(scanner.Text(), "=", 2)
+
+		if ss[0] == "ID" {
+			return ss[1]
+		}
+	}
+
+	return ""
+}
+
+// linuxCommandExists checks if a command exists on a Linux machine.
+func linuxCommandExists(cmd string) bool {
+	err := exec.Command("/bin/sh", "-c", "command -v "+cmd).Run()
+	if err != nil {
+		return false
+	}
+
+	return true
 }
