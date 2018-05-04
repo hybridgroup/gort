@@ -84,8 +84,24 @@ func Arduino() cli.Command {
 			case "install":
 				switch runtime.GOOS {
 				case "linux":
-					fmt.Println("Attempting to install avrdude with apt-get...")
-					cmd := exec.Command("sudo", "apt-get", "-y", "install", "avrdude")
+					if linuxCommandExists("avrdude") {
+						return
+					}
+
+					fmt.Println("Attempting to install avrdude")
+					var cmd *exec.Cmd
+					switch getLinuxDist() {
+					case "arch":
+						cmd = exec.Command("sudo", "pacman", "-S", "--noconfirm", "avrdude")
+					case "fedora":
+						cmd = exec.Command("sudo", "yum", "-y", "install", "avrdude")
+					case "ubuntu":
+						cmd = exec.Command("sudo", "apt-get", "-y", "install", "avrdude")
+					default:
+						fmt.Println("Unable to detect Linux distribution. Try installing avrdude manually first")
+						return
+					}
+
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {

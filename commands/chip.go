@@ -166,8 +166,19 @@ func chipBuildAndInstallOverlay(info chipOverlayInfo) (err error) {
 func chipInstallDTC() (err error) {
 	dir, _ := createGortDirectory()
 
-	fmt.Println("Attempting to install dev tools with apt-get.")
-	cmd := exec.Command("sudo", "apt-get", "-y", "install", "flex", "bison", "git")
+	var cmd *exec.Cmd
+
+	fmt.Println("Attempting to install dev tools.")
+	switch getLinuxDist() {
+	case "arch":
+		cmd = exec.Command("sudo", "pacman", "-S", "--noconfirm", "flex", "bison", "git")
+	case "fedora":
+		cmd = exec.Command("sudo", "yum", "-y", "install", "flex", "bison", "git")
+	case "ubuntu":
+		cmd = exec.Command("sudo", "apt-get", "-y", "install", "flex", "bison", "git")
+	default:
+		return fmt.Errorf("Unable to detect Linux distribution. Try installing autoconf manually first")
+	}
 	cmd.Dir = dir
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
