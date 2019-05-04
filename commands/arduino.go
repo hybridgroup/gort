@@ -127,7 +127,7 @@ func Arduino() cli.Command {
 					fmt.Println("Installing winavr...")
 					fmt.Printf("Initial value for $PATH: %s\n", os.Getenv("PATH"))
 					dirName, _ := createGortDirectory()
-					exeFile := "https://s3.amazonaws.com/gort-io/support/WinAVR-20100110-install.exe"
+					exeFile := "https://gort.io/support/WinAVR-20100110-install.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
 					cmd := exec.Command(gortDirName() + "\\" + fileName)
 					cmd.Stdout = os.Stdout
