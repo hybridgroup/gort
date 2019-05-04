@@ -1,4 +1,8 @@
 ## Release History
+Version 0.9.1
+- Change download location to Github
+- Rebuild using Go1.11.2
+
 Version 0.9.0
 - Display more useful messages on installing avrdude
 - Now able to install BLE scanner and scan for BLE devices on OS X

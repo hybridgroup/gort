@@ -159,7 +159,7 @@ func osxBLEScan() {
 
 func downloadOSXBLEScanner() {
 	dirName, _ := createGortDirectory()
-	zipFile := "https://s3.amazonaws.com/gort-io/support/osx/blescanner.zip"
+	zipFile := "https://gort.io/support/osx/blescanner.zip"
 	fileName := downloadFromUrl(dirName, zipFile)
 	unzipOSXScannerInstaller(dirName, dirName+"/"+fileName)
 
