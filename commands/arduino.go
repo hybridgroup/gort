@@ -124,7 +124,7 @@ func Arduino() cli.Command {
 					fmt.Println("OS not yet supported.")
 				}
 			case "upload":
-				if len(c.Args()) < 2 {
+				if len(c.Args()) < 3 {
 					fmt.Println("Invalid number of arguments.")
 					usage()
 					return
