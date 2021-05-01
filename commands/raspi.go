@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"runtime"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 // Raspi command implementation

@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 // Klaatu function returns the CLI commands for gort klaatu

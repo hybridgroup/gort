@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 // Scan function returns the CLI commands for gort scan

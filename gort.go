@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/codegangsta/cli"
 	"github.com/hybridgroup/gort/commands"
+	"github.com/urfave/cli"
 )
 
 func main() {

@@ -10,7 +10,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 // Particle function returns the CLI commands for gort particle

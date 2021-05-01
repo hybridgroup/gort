@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 // Chip command implementation

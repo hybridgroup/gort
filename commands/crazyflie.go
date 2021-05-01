@@ -5,7 +5,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/codegangsta/cli"
+	"github.com/urfave/cli"
 )
 
 // Crazyflie function returns the CLI commands for gort crazyflie
