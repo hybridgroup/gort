@@ -14,7 +14,11 @@ Want to use Javascript on Robots? Check out Cylon.js (http://cylonjs.com)
 Want to use Ruby on robots? Check out Artoo (http://artoo.io)
 
 ## Getting Started
-We now have precompiled binaries! You can also build from source.
+We now have precompiled binaries! You can also build from source:
+
+```shell
+$> go install github.com/hybridgroup/gort@latest
+```
 
 The Gort CLI provides many useful features on many hardware platforms, and has no other dependencies. You install Gort separately from any framework, which means you can use it to program Arduinos with the Firmata firmware also compatible with Cylon.js, Gobot, Artoo, & many other libraries.
 
